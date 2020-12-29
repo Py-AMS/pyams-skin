@@ -27,6 +27,7 @@ ${structure:provider:pyams.header}
 		</ul>
 		<div class="tab-content p-2">
 			<div tal:repeat="tabform view.tabforms"
+				 id="tab_${tales:cache_key(tabform)}"
 				 class="tab-pane fade show ${'active' if repeat['tabform'].start() else ''}">
 				${structure:tabform.render()}
 			</div>
