@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.4
+-----
+ - updated forms legend display condition
+
 1.0.3
 -----
  - updated forms templates
