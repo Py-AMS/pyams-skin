@@ -16,11 +16,12 @@ This module defines interfaces and templates for standard and custom forms widge
 """
 
 from zope.interface import Attribute, Interface
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
 from pyams_form.interfaces.widget import IButtonWidget as IButtonWidgetBase, \
-    ICheckBoxWidget, IPasswordWidget, ISelectWidget, ISubmitWidget as ISubmitWidgetBase, \
-    ITextAreaWidget, ITextWidget, IWidget
+    ICheckBoxWidget, IPasswordWidget, ISelectWidget, ISequenceWidget, \
+    ISubmitWidget as ISubmitWidgetBase, ITextAreaWidget, ITextWidget, IWidget
 from pyams_form.template import override_widget_layout, override_widget_template, \
     widget_template_config
 from pyams_layer.interfaces import IPyAMSLayer
@@ -123,7 +124,7 @@ override_widget_template(ISelectWidget,
 
 
 #
-# Custom widgets interfaces
+# Dynamic select widget interface
 #
 
 class IDynamicSelectWidget(ISelectWidget):
@@ -137,6 +138,10 @@ class IDynamicSelectWidget(ISelectWidget):
     term_factory = Attribute("Factory used to create select term from a given value")
 
 
+#
+# HTML editor widget interfaces
+#
+
 class IHTMLEditorConfiguration(Interface):
     """HTML editor configuration interface"""
 
@@ -149,3 +154,34 @@ class IHTMLWidget(ITextWidget):
     """HTML editor widget interface"""
 
     editor_data = Attribute("Custom editor data")
+
+
+#
+# HTTP method selector widget interface
+#
+
+HTTP_METHODS = ('GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'DELETE')
+
+HTTP_METHODS_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v) for v in HTTP_METHODS
+])
+
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/http-method-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/http-method-display.pt', layer=IPyAMSLayer)
+class IHTTPMethodWidget(IWidget):
+    """HTTP method selector widget interface"""
+
+
+#
+# Ordered list widget interface
+#
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/ordered-list-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/ordered-list-display.pt', layer=IPyAMSLayer)
+class IOrderedListWidget(ISequenceWidget):
+    """Ordered list widget marker interface"""
