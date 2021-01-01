@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1.0
+-----
+ - added form widget for HTTPMethod schema field
+ - added form widget for OrderedList schema field
+
 1.0.5
 -----
  - package version mismatch
