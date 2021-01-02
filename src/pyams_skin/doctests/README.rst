@@ -108,4 +108,77 @@ Custom buttons
     '<input type="submit"\n       id="form-buttons-close"\n       name="form.buttons.close"\n       class="submit-widget closebutton-field"\n       value="Close" />'
 
 
+Custom form fields
+------------------
+
+    >>> from zope.schema import Tuple, TextLine
+    >>> from pyams_utils.schema import HTTPMethodField
+
+    >>> class IMyContent(Interface):
+    ...     list_field = Tuple(title="List field",
+    ...                        value_type=TextLine())
+    ...     http_method = HTTPMethodField(title="HTTP method")
+
+    >>> from zope.interface import implementer
+    >>> from zope.schema.fieldproperty import FieldProperty
+
+    >>> @implementer(IMyContent)
+    ... class MyContent:
+    ...     list_field = FieldProperty(IMyContent['list_field'])
+    ...     http_method = FieldProperty(IMyContent['http_method'])
+
+    >>> content = MyContent()
+    >>> content.list_field = ('value 1', 'value2')
+    >>> content.http_method = ('POST', '/api/auth/jwt/token')
+
+    >>> from zope.interface import alsoProvides
+    >>> from pyams_layer.interfaces import IFormLayer
+
+    >>> request = TestRequest(context=content)
+    >>> alsoProvides(request, IFormLayer)
+
+    >>> from pyams_skin.widget.list import OrderedListFieldWidget
+    >>> list_widget = OrderedListFieldWidget(IMyContent['list_field'], request)
+    >>> list_widget.extract()
+    <NO_VALUE>
+
+    >>> request = TestRequest(context=content, params={
+    ...     'list_field': 'value2;value1'
+    ... })
+    >>> alsoProvides(request, IFormLayer)
+    >>> list_widget = OrderedListFieldWidget(IMyContent['list_field'], request)
+    >>> list_widget.extract()
+    ('value2', 'value1')
+
+    >>> from pyams_form.interfaces.form import IContextAware
+    >>> from pyams_skin.widget.http import HTTPMethodFieldWidget, HTTPMethodDataConverter
+
+    >>> http_widget = HTTPMethodFieldWidget(IMyContent['http_method'], request)
+    >>> http_widget.context = content
+    >>> alsoProvides(http_widget, IContextAware)
+    >>> http_widget.update()
+    >>> http_widget.value
+    ('POST', '/api/auth/jwt/token')
+    >>> http_widget.display_value
+    ('POST', '/api/auth/jwt/token')
+
+    >>> http_widget.extract()
+    <NO_VALUE>
+
+    >>> request = TestRequest(context=content, params={
+    ...     'http_method-empty-marker': '1',
+    ...     'http_method-verb': 'GET',
+    ...     'http_method-url': '/api/auth/jwt/another'
+    ... })
+    >>> http_widget = HTTPMethodFieldWidget(IMyContent['http_method'], request)
+    >>> http_widget.context = content
+    >>> alsoProvides(http_widget, IContextAware)
+    >>> http_widget.extract()
+    ('GET', '/api/auth/jwt/another')
+    >>> http_widget.http_methods
+    ('GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'DELETE')
+
+
+Tests cleanup:
+
     >>> tearDown()
