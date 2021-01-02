@@ -24,4 +24,5 @@
 		  onblur="${view.onblur}"
 		  onchange="${view.onchange}"
 		  onselect="${view.onselect}"
-		  data-ams-data="${tales:object_data(view)}">${view.value}</textarea>
+		  data-ams-data='${tales:object_data(view)}'
+		  data-ams-options='${view.editor_data}'>${view.value}</textarea>
