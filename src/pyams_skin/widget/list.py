@@ -29,11 +29,13 @@ from pyams_utils.interfaces.form import NO_VALUE
 class OrderedListWidget(HTMLFormElement, SequenceWidget):
     """Ordered list widget"""
 
+    separator = ';'
+
     def extract(self, default=NO_VALUE):
         params = self.request.params
         value = params.get(self.name, default)
         if value is not default:
-            value = tuple(value.split(';'))
+            value = tuple(value.split(self.separator))
         return value
 
 

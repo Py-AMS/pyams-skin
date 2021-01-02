@@ -16,6 +16,7 @@ This module defines interfaces and templates for standard and custom forms widge
 """
 
 from zope.interface import Attribute, Interface
+from zope.schema import TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
@@ -185,3 +186,5 @@ class IHTTPMethodWidget(IWidget):
                         template='templates/ordered-list-display.pt', layer=IPyAMSLayer)
 class IOrderedListWidget(ISequenceWidget):
     """Ordered list widget marker interface"""
+
+    separator = TextLine(title="Values separator")
