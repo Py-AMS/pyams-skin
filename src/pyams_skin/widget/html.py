@@ -50,8 +50,8 @@ class HTMLWidget(TextAreaWidget):
                                               IHTMLEditorConfiguration,
                                               name=self.basename)  # pylint:disable=no-member
         if configuration is None:
-            configuration = queryMultiAdapter(((self.form, self.request),
-                                               IHTMLEditorConfiguration))
+            configuration = queryMultiAdapter((self.form, self.request),
+                                              IHTMLEditorConfiguration)
         if configuration is None:
             configuration = getattr(self, 'editor_configuration', None)
         if configuration is not None:
