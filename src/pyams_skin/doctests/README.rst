@@ -112,12 +112,14 @@ Custom form fields
 ------------------
 
     >>> from zope.schema import Tuple, TextLine
-    >>> from pyams_utils.schema import HTTPMethodField
+    >>> from pyams_utils.schema import HTTPMethodField, HTMLField
+    >>> from pyams_layer.interfaces import IPyAMSLayer
 
     >>> class IMyContent(Interface):
     ...     list_field = Tuple(title="List field",
     ...                        value_type=TextLine())
     ...     http_method = HTTPMethodField(title="HTTP method")
+    ...     html_field = HTMLField(title="HTML field")
 
     >>> from zope.interface import implementer
     >>> from zope.schema.fieldproperty import FieldProperty
@@ -126,16 +128,18 @@ Custom form fields
     ... class MyContent:
     ...     list_field = FieldProperty(IMyContent['list_field'])
     ...     http_method = FieldProperty(IMyContent['http_method'])
+    ...     html_field = FieldProperty(IMyContent['html_field'])
 
     >>> content = MyContent()
     >>> content.list_field = ('value 1', 'value2')
     >>> content.http_method = ('POST', '/api/auth/jwt/token')
+    >>> content.html_field = '<p>This is a paragraph</p>'
 
     >>> from zope.interface import alsoProvides
     >>> from pyams_layer.interfaces import IFormLayer
 
     >>> request = TestRequest(context=content)
-    >>> alsoProvides(request, IFormLayer)
+    >>> alsoProvides(request, IPyAMSLayer)
 
     >>> from pyams_skin.widget.list import OrderedListFieldWidget
     >>> list_widget = OrderedListFieldWidget(IMyContent['list_field'], request)
@@ -145,7 +149,7 @@ Custom form fields
     >>> request = TestRequest(context=content, params={
     ...     'list_field': 'value2;value1'
     ... })
-    >>> alsoProvides(request, IFormLayer)
+    >>> alsoProvides(request, IPyAMSLayer)
     >>> list_widget = OrderedListFieldWidget(IMyContent['list_field'], request)
     >>> list_widget.extract()
     ('value2', 'value1')
@@ -170,6 +174,8 @@ Custom form fields
     ...     'http_method-verb': 'GET',
     ...     'http_method-url': '/api/auth/jwt/another'
     ... })
+    >>> alsoProvides(request, IPyAMSLayer)
+
     >>> http_widget = HTTPMethodFieldWidget(IMyContent['http_method'], request)
     >>> http_widget.context = content
     >>> alsoProvides(http_widget, IContextAware)
@@ -177,6 +183,24 @@ Custom form fields
     ('GET', '/api/auth/jwt/another')
     >>> http_widget.http_methods
     ('GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'DELETE')
+
+    >>> from pyams_skin.widget.html import HTMLFieldWidget
+    >>> request = TestRequest(context=content)
+    >>> alsoProvides(request, IPyAMSLayer)
+
+    >>> html_widget = HTMLFieldWidget(IMyContent['html_field'], request)
+    >>> html_widget.context = content
+    >>> alsoProvides(html_widget, IContextAware)
+    >>> html_widget.update()
+    >>> html_widget.value
+    '<p>This is a paragraph</p>'
+    >>> html_widget.editor_data is None
+    True
+    >>> pprint.pprint(html_widget.render())
+    ('<textarea id="html_field"\n'
+     '\t\t  name="html_field"\n'
+     '\t\t  class="form-control tinymce textarea-widget required htmlfield-field"\n'
+     '\t\t  data-ams-data="">&lt;p&gt;This is a paragraph&lt;/p&gt;</textarea>')
 
 
 Tests cleanup:
