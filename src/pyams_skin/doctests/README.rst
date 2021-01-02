@@ -26,7 +26,7 @@ This package is composed of a set of utility functions, usable into any Pyramid 
 Custom buttons
 --------------
 
-    >>> from pyams_layer.interfaces import IFormLayer
+    >>> from pyams_layer.interfaces import IPyAMSLayer
 
     >>> from pyams_form.interfaces.button import IButtonAction
     >>> from pyams_form.interfaces.widget import IFieldWidget
@@ -36,21 +36,21 @@ Custom buttons
 
     >>> from pyams_skin.widget.button import SubmitFieldWidget, SubmitButtonAction
     >>> call_decorator(config, adapter_config, SubmitFieldWidget,
-    ...                required=(ISubmitButton, IFormLayer), provides=IFieldWidget)
+    ...                required=(ISubmitButton, IPyAMSLayer), provides=IFieldWidget)
     >>> call_decorator(config, adapter_config, SubmitButtonAction,
-    ...                required=(IFormLayer, ISubmitButton), provides=IButtonAction)
+    ...                required=(IPyAMSLayer, ISubmitButton), provides=IButtonAction)
 
     >>> from pyams_skin.widget.button import ActionFieldWidget, ActionButtonAction
     >>> call_decorator(config, adapter_config, ActionFieldWidget,
-    ...                required=(IActionButton, IFormLayer), provides=IFieldWidget)
+    ...                required=(IActionButton, IPyAMSLayer), provides=IFieldWidget)
     >>> call_decorator(config, adapter_config, ActionButtonAction,
-    ...                required=(IFormLayer, IActionButton), provides=IButtonAction)
+    ...                required=(IPyAMSLayer, IActionButton), provides=IButtonAction)
 
     >>> from pyams_skin.widget.button import ResetFieldWidget, ResetButtonAction
     >>> call_decorator(config, adapter_config, ResetFieldWidget,
-    ...                required=(IResetButton, IFormLayer), provides=IFieldWidget)
+    ...                required=(IResetButton, IPyAMSLayer), provides=IFieldWidget)
     >>> call_decorator(config, adapter_config, ResetButtonAction,
-    ...                required=(IFormLayer, IResetButton), provides=IButtonAction)
+    ...                required=(IPyAMSLayer, IResetButton), provides=IButtonAction)
 
     >>> from pyams_form.testing import TestRequest
 
@@ -72,9 +72,7 @@ Custom buttons
     ...     fields = Fields(Interface)
 
     >>> request = TestRequest()
-    >>> alsoProvides(request, IFormLayer)
-    >>> IFormLayer.providedBy(request)
-    True
+    >>> alsoProvides(request, IPyAMSLayer)
 
     >>> form = TestForm(None, request)
     >>> form.update()
@@ -83,29 +81,53 @@ Custom buttons
     True
     >>> form.actions['submit']
     <SubmitButtonAction 'form.buttons.submit' 'Submit'>
-    >>> form.actions['submit'].render()
-    '<input type="submit"\n       id="form-buttons-submit"\n       name="form.buttons.submit"\n       class="submit-widget submitbutton-field"\n       value="Submit" />'
+    >>> print(form.actions['submit'].render())
+    <button
+                type="submit"
+                id="form-buttons-submit"
+                name="form.buttons.submit"
+                class="btn btn-primary submit-widget submitbutton-field "
+                value="Submit"
+                data-loading-test="Submit...">Submit</button>
+
 
     >>> 'action' in form.actions
     True
     >>> form.actions['action']
     <ActionButtonAction 'form.buttons.action' 'Action'>
-    >>> form.actions['action'].render()
-    '<input type="submit"\n       id="form-buttons-action"\n       name="form.buttons.action"\n       class="submit-widget actionbutton-field"\n       value="Action" />'
+    >>> print(form.actions['action'].render())
+    <button
+                type="button"
+                id="form-buttons-action"
+                name="form.buttons.action"
+                class="btn btn-secondary submit-widget actionbutton-field "
+                value="Action"
+                data-loading-test="Action...">Action</button>
 
     >>> 'reset' in form.actions
     True
     >>> form.actions['reset']
     <ResetButtonAction 'form.buttons.reset' 'Reset'>
-    >>> form.actions['reset'].render()
-    '<input type="submit"\n       id="form-buttons-reset"\n       name="form.buttons.reset"\n       class="submit-widget resetbutton-field"\n       value="Reset" />'
+    >>> print(form.actions['reset'].render())
+    <button
+                type="reset"
+                id="form-buttons-reset"
+                name="form.buttons.reset"
+                class="btn btn-light submit-widget resetbutton-field"
+                value="Reset">Reset</button>
 
     >>> 'close' in form.actions
     True
     >>> form.actions['close']
     <CloseButtonAction 'form.buttons.close' 'Close'>
-    >>> form.actions['close'].render()
-    '<input type="submit"\n       id="form-buttons-close"\n       name="form.buttons.close"\n       class="submit-widget closebutton-field"\n       value="Close" />'
+    >>> print(form.actions['close'].render())
+    <button
+                type="button"
+                id="form-buttons-close"
+                name="form.buttons.close"
+                class="btn btn-light submit-widget closebutton-field"
+                value="Close"
+                data-dismiss="modal">Close</button>
 
 
 Custom form fields
@@ -113,7 +135,6 @@ Custom form fields
 
     >>> from zope.schema import Tuple, TextLine
     >>> from pyams_utils.schema import HTTPMethodField, HTMLField
-    >>> from pyams_layer.interfaces import IPyAMSLayer
 
     >>> class IMyContent(Interface):
     ...     list_field = Tuple(title="List field",
@@ -136,7 +157,7 @@ Custom form fields
     >>> content.html_field = '<p>This is a paragraph</p>'
 
     >>> from zope.interface import alsoProvides
-    >>> from pyams_layer.interfaces import IFormLayer
+    >>> from pyams_layer.interfaces import IPyAMSLayer
 
     >>> request = TestRequest(context=content)
     >>> alsoProvides(request, IPyAMSLayer)
@@ -199,8 +220,16 @@ Custom form fields
     >>> pprint.pprint(html_widget.render())
     ('<textarea id="html_field"\n'
      '\t\t  name="html_field"\n'
+     '\t\t  class="form-control tinymce textarea-widget required '
+     'htmlfield-field">&lt;p&gt;This is a paragraph&lt;/p&gt;</textarea>')
+
+    >>> html_widget.editor_configuration = {'ams-editor-style': 'modern'}
+    >>> pprint.pprint(html_widget.render())
+    ('<textarea id="html_field"\n'
+     '\t\t  name="html_field"\n'
      '\t\t  class="form-control tinymce textarea-widget required htmlfield-field"\n'
-     '\t\t  data-ams-data="">&lt;p&gt;This is a paragraph&lt;/p&gt;</textarea>')
+     '\t\t  data-ams-options=\'{"ams-editor-style": "modern"}\'>&lt;p&gt;This is a '
+     'paragraph&lt;/p&gt;</textarea>')
 
 
 Tests cleanup:
