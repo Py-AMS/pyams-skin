@@ -2,6 +2,7 @@
    href="${view.get_href()}"
    target="${view.target}"
    data-toggle="${'modal' if view.modal_target else None}"
+   data-ams-modules="${'modal' if view.modal_target else None}"
    data-ams-click-handler="${view.click_handler}"
    data-ams-data="${tales:object_data(view)}">
 	<i class="${view.icon_class} fa-fw mr-1"></i>
