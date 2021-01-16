@@ -125,6 +125,34 @@ override_widget_template(ISelectWidget,
 
 
 #
+# Date/time widgets
+#
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/datetime-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/datetime-display.pt', layer=IPyAMSLayer)
+class IDatetimeWidget(ITextWidget):
+    """Datetime widget interface"""
+
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/date-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/date-display.pt', layer=IPyAMSLayer)
+class IDateWidget(ITextWidget):
+    """Date widget interface"""
+
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/time-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/time-display.pt', layer=IPyAMSLayer)
+class ITimeWidget(ITextWidget):
+    """Time widget interface"""
+
+
+#
 # Dynamic select widget interface
 #
 
