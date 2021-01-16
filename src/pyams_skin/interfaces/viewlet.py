@@ -16,6 +16,7 @@ This module defines several interfaces for generic content managers which can be
 any web application.
 """
 
+from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Text, TextLine
 
 from pyams_skin.interfaces import BOOTSTRAP_STATUS
@@ -121,6 +122,25 @@ class IContextAction(IViewletManager):
     target = TextLine(title="Menu link target name")
 
     modal_target = Bool(title="Modal target")
+
+
+class IBreadcrumbs(Interface):
+    """Main breadcrumbs interface"""
+
+    items = Attribute("Breadcrumbs items iterator attribute")
+
+
+class IBreadcrumbItem(Interface):
+    """Breadcrumb item interface"""
+
+    label = TextLine(title="Item label")
+
+    css_class = TextLine(title="CSS class")
+
+    view_name = TextLine(title="Link view name")
+
+    def get_href(self):
+        """HREF attribute getter"""
 
 
 class IAlertMessage(IViewlet):
