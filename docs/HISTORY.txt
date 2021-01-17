@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.2.0
+-----
+ - added breadcrumbs viewlet manager
+ - added datetime, date and time input widgets
+ - small updates in forms templates
+ - updated doctests
+
 1.1.1
 -----
  - added attribute to store values separator in OrderedListWidget
