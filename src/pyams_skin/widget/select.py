@@ -49,14 +49,17 @@ class DynamicSelectWidgetTermsFactory(SimpleVocabulary):
         self.form = form
         self.field = field
         self.widget = widget
-        super(DynamicSelectWidgetTermsFactory, self).__init__(self.getTerms())
+        super().__init__(self.getTerms())
 
     def getTerms(self):  # pylint:disable=invalid-name
         """Get terms from factory"""
         values = NO_VALUE
         result = []
         if (not self.widget.ignore_request) and (self.widget.name in self.request.params):
-            values = self.request.params.getall(self.widget.name)
+            try:
+                values = self.request.params.getall(self.widget.name)
+            except AttributeError:
+                values = self.request.params.get(self.widget.name)
         if (values is NO_VALUE) and (not self.widget.ignore_context):
             values = getMultiAdapter((self.context, self.field), IDataManager).query()
         if values and (values is not NO_VALUE):
