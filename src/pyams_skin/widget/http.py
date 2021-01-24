@@ -50,6 +50,7 @@ class HTTPMethodWidget(HTMLFormElement, Widget):
 
     @property
     def display_value(self):
+        """Display value getter"""
         return self.value or (None, None)
 
     def extract(self, default=NO_VALUE):
@@ -63,10 +64,12 @@ class HTTPMethodWidget(HTMLFormElement, Widget):
 
     @property
     def http_methods(self):
+        """HTTP methods getter"""
         return HTTP_METHODS
 
 
-@adapter_config(required=(IHTTPMethodField, IFormLayer), provides=IFieldWidget)
+@adapter_config(required=(IHTTPMethodField, IFormLayer),
+                provides=IFieldWidget)
 def HTTPMethodFieldWidget(field, request):  # pylint: disable=invalid-name
     """HTTP method getter widget factory"""
     return FieldWidget(field, HTTPMethodWidget(request))

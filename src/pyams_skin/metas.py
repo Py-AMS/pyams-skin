@@ -34,10 +34,11 @@ class MetasTalesExtension(ContextRequestViewAdapter):
     """tales:metas TALES extension"""
 
     def render(self, context=None):
+        """Extension renderer"""
         if context is None:
             context = self.context
         result = []
-        for name, adapter in sorted(
+        for _name, adapter in sorted(
                 self.request.registry.getAdapters((context, self.request, self.view),
                                                   IHTMLContentMetas),
                 key=lambda x: getattr(x[1], 'weight', 9999)):
@@ -50,6 +51,7 @@ class MetasTalesExtension(ContextRequestViewAdapter):
 #
 
 def escape_value(value):
+    """HTML escaped value"""
     return escape(value) if isinstance(value, str) else value
 
 
@@ -74,14 +76,14 @@ class HTMLTagMeta(BaseMeta):
     """HTML tag meta header"""
 
     def __init__(self, tag, content, **attrs):
-        super(HTMLTagMeta, self).__init__(tag, content, **attrs)
+        super().__init__(tag, content, **attrs)
 
 
 class HTTPEquivMeta(BaseMeta):
     """HTTP-Equiv meta header"""
 
     def __init__(self, http_equiv, value):
-        super(HTTPEquivMeta, self).__init__(
+        super().__init__(
             **{'http-equiv': http_equiv, 'content': escape_value(value)})
 
 
@@ -89,33 +91,33 @@ class ValueMeta(BaseMeta):
     """Basic value meta header"""
 
     def __init__(self, name, value):
-        super(ValueMeta, self).__init__(**{name: escape_value(value)})
+        super().__init__(**{name: escape_value(value)})
 
 
 class ContentMeta(BaseMeta):
     """Content meta header"""
 
     def __init__(self, name, value):
-        super(ContentMeta, self).__init__(name=name, content=escape_value(value))
+        super().__init__(name=name, content=escape_value(value))
 
 
 class PropertyMeta(BaseMeta):
     """Property meta header"""
 
-    def __init__(self, property, value):
-        super(PropertyMeta, self).__init__(property=property, content=escape_value(value))
+    def __init__(self, property, value):  # pylint: disable=redefined-builtin
+        super().__init__(property=property, content=escape_value(value))
 
 
 class SchemaMeta(BaseMeta):
     """Schema.org property meta header"""
 
     def __init__(self, name, value):
-        super(SchemaMeta, self).__init__(itemprop=name, content=escape_value(value))
+        super().__init__(itemprop=name, content=escape_value(value))
 
 
 class LinkMeta(BaseMeta):
     """Link meta header"""
 
-    def __init__(self, rel, type, href, **kwargs):
-        super(LinkMeta, self).__init__('link', rel=rel, type=type, href=escape_value(href),
-                                       **kwargs)
+    def __init__(self, rel, type, href, **kwargs):  # pylint: disable=redefined-builtin
+        super().__init__('link', rel=rel, type=type, href=escape_value(href),
+                         **kwargs)
