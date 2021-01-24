@@ -422,11 +422,6 @@ Complete form
     >>> form.fields = Fields(IMyContent)
 
     >>> form.update()
-    >>> print(form.render())
-    <section class="rounded-lg"
-             data-ams-modules="form plugins">
-    ...
-    </section>
 
 
 Tests cleanup:
