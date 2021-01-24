@@ -21,7 +21,7 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
 from pyams_form.interfaces.widget import IButtonWidget as IButtonWidgetBase, \
-    ICheckBoxWidget, IPasswordWidget, ISelectWidget, ISequenceWidget, \
+    ICheckBoxWidget, IObjectWidget, IPasswordWidget, ISelectWidget, ISequenceWidget, \
     ISubmitWidget as ISubmitWidgetBase, ITextAreaWidget, ITextWidget, IWidget
 from pyams_form.template import override_widget_layout, override_widget_template, \
     widget_template_config
@@ -42,6 +42,28 @@ override_widget_layout(IWidget,
 override_widget_layout(IWidget,
                        mode=DISPLAY_MODE,
                        template='templates/widget-layout.pt', layer=IPyAMSLayer)
+
+
+#
+# Object widgets templates
+#
+
+override_widget_layout(IObjectWidget,
+                       mode=INPUT_MODE,
+                       template='templates/object-layout.pt', layer=IPyAMSLayer)
+
+override_widget_layout(IObjectWidget,
+                       mode=DISPLAY_MODE,
+                       template='templates/object-layout.pt', layer=IPyAMSLayer)
+
+
+override_widget_template(IObjectWidget,
+                         mode=INPUT_MODE,
+                         template='templates/object-input.pt', layer=IPyAMSLayer)
+
+override_widget_template(IObjectWidget,
+                         mode=DISPLAY_MODE,
+                         template='templates/object-display.pt', layer=IPyAMSLayer)
 
 
 #
