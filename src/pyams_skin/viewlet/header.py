@@ -18,7 +18,7 @@ This module provides a single "pyams.header" viewlet manager used to handle inte
 from zope.interface import Interface
 
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_skin.interfaces.viewlet import IHeaderViewletManager
+from pyams_skin.interfaces.viewlet import IFormHeaderViewletManager, IHeaderViewletManager
 from pyams_viewlet.manager import WeightOrderedViewletManager, viewletmanager_config
 
 
@@ -29,3 +29,9 @@ __docformat__ = 'restructuredtext'
                        provides=IHeaderViewletManager)
 class HeaderViewletManager(WeightOrderedViewletManager):
     """Internal header viewlet manager"""
+
+
+@viewletmanager_config(name='pyams.form_header', layer=IPyAMSLayer, view=Interface,
+                       provides=IFormHeaderViewletManager)
+class FormHeaderViewletManager(WeightOrderedViewletManager):
+    """Form header viewlet manager"""

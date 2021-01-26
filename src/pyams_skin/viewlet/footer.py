@@ -18,7 +18,7 @@ This module provides a single "pyams.footer" viewlet manager used to handle inte
 from zope.interface import Interface
 
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_skin.interfaces.viewlet import IFooterViewletManager
+from pyams_skin.interfaces.viewlet import IFooterViewletManager, IFormFooterViewletManager
 from pyams_viewlet.manager import WeightOrderedViewletManager, viewletmanager_config
 
 
@@ -29,3 +29,9 @@ __docformat__ = 'restructuredtext'
                        provides=IFooterViewletManager)
 class FooterViewletManager(WeightOrderedViewletManager):
     """Internal footer viewlet manager"""
+
+
+@viewletmanager_config(name='pyams.form_footer', layer=IPyAMSLayer, view=Interface,
+                       provides=IFormFooterViewletManager)
+class FormFooterViewletManager(WeightOrderedViewletManager):
+    """Form footer viewlet manager"""

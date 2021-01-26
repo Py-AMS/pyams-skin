@@ -72,8 +72,16 @@ class IHeaderViewletManager(IViewletManager):
     """Internal header viewlet manager interface"""
 
 
+class IFormHeaderViewletManager(IViewletManager):
+    """Form header viewlet manager interface"""
+
+
 class IFooterViewletManager(IViewletManager):
     """Internal footer viewlet manager interface"""
+
+
+class IFormFooterViewletManager(IViewletManager):
+    """Form footer viewlet manager interface"""
 
 
 class IHelpViewletManager(IViewletManager):

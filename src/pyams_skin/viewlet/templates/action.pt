@@ -2,8 +2,9 @@
    href="${view.get_href()}"
    target="${view.target}"
    data-original-title="${view.hint}"
-   data-toggle="${'modal' if view.modal_target else None}"
    data-placement="${view.hint_placement}"
+   data-toggle="${'modal' if view.modal_target else None}"
+   data-ams-modules="${'modal' if view.modal_target else None}"
    data-ams-click-handler="${view.click_handler}"
    data-ams-data="${tales:object_data(view)}">
 	<i tal:condition="view.icon_class"
