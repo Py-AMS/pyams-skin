@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-01-16 22:06+0100\n"
+"POT-Creation-Date: 2021-02-24 23:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,6 +98,14 @@ msgstr "Supprimer la valeur sélectionnée"
 msgid "(no selection)"
 msgstr "(pas de sélection)"
 
-#: src/pyams_skin/interfaces/templates/form.pt:9
+#: src/pyams_skin/interfaces/templates/form.pt:10
 msgid "Back to previous page"
 msgstr "Revenir à la page précédente"
+
+#: src/pyams_skin/interfaces/templates/dates-range-input.pt:7
+msgid "from"
+msgstr "après le"
+
+#: src/pyams_skin/interfaces/templates/dates-range-input.pt:9
+msgid "to"
+msgstr "et avant le"
