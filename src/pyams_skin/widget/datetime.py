@@ -131,7 +131,7 @@ class DatesRangeWidget(MultiWidget):
     """Dates range widget"""
 
     def update(self):
-        super(MultiWidget, self).update()
+        super(MultiWidget, self).update()  # pylint: disable=bad-super-call
 
 
 @adapter_config(required=(IDatesRangeField, IFormLayer),
@@ -150,7 +150,7 @@ class DatetimesRangeWidget(MultiWidget):
     """Datetimes range widget"""
 
     def update(self):
-        super(MultiWidget, self).update()
+        super(MultiWidget, self).update()  # pylint: disable=bad-super-call
 
 
 @adapter_config(required=(IDatetimesRangeField, IFormLayer),
