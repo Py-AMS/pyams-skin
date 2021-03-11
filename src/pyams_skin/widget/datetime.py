@@ -19,15 +19,18 @@ datetime inputs.
 from zope.interface import implementer_only
 from zope.schema.interfaces import IDate, IDatetime, ITime
 
+from pyams_form.browser.multi import MultiWidget
 from pyams_form.browser.text import TextWidget
 from pyams_form.converter import BaseDataConverter
 from pyams_form.interfaces import IDataConverter
 from pyams_form.interfaces.widget import IFieldWidget
 from pyams_form.widget import FieldWidget
 from pyams_layer.interfaces import IFormLayer
-from pyams_skin.interfaces.widget import IDateWidget, IDatetimeWidget, ITimeWidget
+from pyams_skin.interfaces.widget import IDateWidget, IDatesRangeWidget, IDatetimeWidget, \
+    IDatetimesRangeWidget, ITimeWidget
 from pyams_utils.adapter import adapter_config
 from pyams_utils.date import parse_date
+from pyams_utils.schema import IDatesRangeField, IDatetimesRangeField
 from pyams_utils.timezone import tztime
 
 
@@ -79,6 +82,11 @@ def DatetimeFieldWidget(field, request):  # pylint: disable=invalid-name
 class DateDataConverter(BaseDatetimeDataConverter):
     """Date widget data converter"""
 
+    def to_field_value(self, value):
+        if not value:
+            return None
+        return parse_date(value).date()
+
 
 @implementer_only(IDateWidget)
 class DateWidget(TextWidget):
@@ -112,3 +120,41 @@ class TimeWidget(TextWidget):
 def TimeFieldWidget(field, request):  # pylint: disable=invalid-name
     """Time field widget factory"""
     return FieldWidget(field, TimeWidget(request))
+
+
+#
+# Dates range widget
+#
+
+@implementer_only(IDatesRangeWidget)
+class DatesRangeWidget(MultiWidget):
+    """Dates range widget"""
+
+    def update(self):
+        super(MultiWidget, self).update()
+
+
+@adapter_config(required=(IDatesRangeField, IFormLayer),
+                provides=IFieldWidget)
+def DatesRangeFieldWidget(field, request):  # pylint: disable=invalid-name
+    """Dates range widget factory"""
+    return FieldWidget(field, DatesRangeWidget(request))
+
+
+#
+# Datetimes range widget
+#
+
+@implementer_only(IDatetimesRangeWidget)
+class DatetimesRangeWidget(MultiWidget):
+    """Datetimes range widget"""
+
+    def update(self):
+        super(MultiWidget, self).update()
+
+
+@adapter_config(required=(IDatetimesRangeField, IFormLayer),
+                provides=IFieldWidget)
+def DatetimesRangeFieldWidget(field, request):  # pylint: disable=invalid-name
+    """Datetimes range widget factory"""
+    return FieldWidget(field, DatetimesRangeWidget(request))
