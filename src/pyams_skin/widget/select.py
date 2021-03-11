@@ -66,6 +66,8 @@ class DynamicSelectWidgetTermsFactory(SimpleVocabulary):
             if not isinstance(values, (list, dict, set)):
                 values = (values,)
             for value in values:
+                if not value:
+                    continue
                 result.append(self.widget.term_factory(value))
         return result
 
