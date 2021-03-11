@@ -122,6 +122,11 @@ override_widget_template(ITextAreaWidget,
                          template='templates/textarea-display.pt', layer=IPyAMSLayer)
 
 
+override_widget_template(ITextLinesWidget,
+                         mode=DISPLAY_MODE,
+                         template='templates/textlines-display.pt', layer=IPyAMSLayer)
+
+
 override_widget_template(IPasswordWidget,
                          mode=INPUT_MODE,
                          template='templates/password-input.pt', layer=IPyAMSLayer)
