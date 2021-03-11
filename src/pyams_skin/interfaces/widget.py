@@ -21,8 +21,8 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
 from pyams_form.interfaces.widget import IButtonWidget as IButtonWidgetBase, \
-    ICheckBoxWidget, IObjectWidget, IPasswordWidget, ISelectWidget, ISequenceWidget, \
-    ISubmitWidget as ISubmitWidgetBase, ITextAreaWidget, ITextWidget, IWidget
+    ICheckBoxWidget, IMultiWidget, IObjectWidget, IPasswordWidget, ISelectWidget, ISequenceWidget, \
+    ISubmitWidget as ISubmitWidgetBase, ITextAreaWidget, ITextLinesWidget, ITextWidget, IWidget
 from pyams_form.template import override_widget_layout, override_widget_template, \
     widget_template_config
 from pyams_layer.interfaces import IPyAMSLayer
@@ -243,3 +243,23 @@ class IOrderedListWidget(ISequenceWidget):
     """Ordered list widget marker interface"""
 
     separator = TextLine(title="Values separator")
+
+
+#
+# Dates and datetimes range widget
+#
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/dates-range-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/dates-range-display.pt', layer=IPyAMSLayer)
+class IDatesRangeWidget(IMultiWidget):
+    """Dates range widget marker interface"""
+
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/dates-range-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/dates-range-display.pt', layer=IPyAMSLayer)
+class IDatetimesRangeWidget(IMultiWidget):
+    """Datetimes range widget marker interface"""
