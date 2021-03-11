@@ -1,15 +1,16 @@
 <section class="rounded-lg"
 		 data-ams-modules="form plugins"
 		 i18n:domain="pyams_skin">
-	<h2 class="bg-secondary-modal pl-3 py-2">
+	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3 py-2">
 		<a tal:define="back_url view.back_url | nothing"
 		   tal:condition="back_url"
-		   href="${back_url}" data-ams-target="#content">
+		   class="mr-1"
+		   href="${back_url}" data-ams-target="${getattr(view, 'back_url_target', '#content')}">
 			<i class="fas fa-fw fa-backward hint"
 			   data-original-title="Back to previous page"
 			   i18n:attributes="data-original-title"></i>
 		</a>
-		<i tal:omit-tag="" i18n:translate="">${view.title}</i>
+		<span class="flex-grow-1" i18n:translate="">${view.title}</span>
 	</h2>
 	<form class="ams-form ${view.css_class | ''}"
 		  id="${view.id}"
