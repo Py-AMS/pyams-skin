@@ -18,7 +18,7 @@ This module defines standard MyAMS HTML metas headers.
 from zope.interface import Interface
 
 from pyams_skin.interfaces.metas import IHTMLContentMetas
-from pyams_skin.metas import ContentMeta, HTTPEquivMeta
+from pyams_skin.metas import ContentMeta, HTTPEquivMeta, ValueMeta
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 
 
@@ -35,8 +35,10 @@ class LayoutMetasAdapter(ContextRequestViewAdapter):
 
     @staticmethod
     def get_metas():
-        """Layout metas headers"""
+        """Layout and content metas headers"""
         yield HTTPEquivMeta('X-UA-Compatible', 'IE=edge,chrome=1')
+        yield HTTPEquivMeta('Content-Type', 'text/html; charset=utf-8')
+        yield ValueMeta('charset', 'utf-8')
         yield ContentMeta('HandheldFriendly', 'True')
         yield ContentMeta('viewport', 'width=device-width, initial-scale=1.0, '
                                       'maximum-scale=1.0, user-scalable=no')

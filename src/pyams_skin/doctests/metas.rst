@@ -27,6 +27,8 @@ on adapters providing *IHTMLContentMetas* interface:
     >>> metas = MetasTalesExtension(context, request, None)
     >>> print(metas.render())
     <meta ...http-equiv="X-UA-Compatible"... />
+    <meta ...http-equiv="Content-Type"... />
+    <meta charset="utf-8" />
     <meta ...name="HandheldFriendly"... />
     <meta ...name="viewport"... />
 
