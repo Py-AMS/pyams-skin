@@ -104,7 +104,7 @@ msgstr "Revenir à la page précédente"
 
 #: src/pyams_skin/interfaces/templates/dates-range-input.pt:7
 msgid "from"
-msgstr "après le"
+msgstr "à partir du"
 
 #: src/pyams_skin/interfaces/templates/dates-range-input.pt:9
 msgid "to"
