@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.2
+-----
+ - added content-type and charset metas headers
+ - added support of AJAX params to Select2 input widget
+ - updated translation
+
 1.5.1
 -----
  - updated actions templates
