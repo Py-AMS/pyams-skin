@@ -21,6 +21,7 @@
 		size="${view.size}"
 		data-placeholder="${view.placeholder | nothing}"
 		data-ajax--url="${view.ajax_url | nothing}"
+		data-ajax--params='${view.ajax_params | nothing}'
 		data-ams-data='${tales:object_data(view)}'
 		readonly="readonly">
 	<tal:if condition="view.placeholder | nothing">
