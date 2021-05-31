@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.5.3
+-----
+ - added missing text lines widget input template
+ - updated form's fieldset class handler
+
 1.5.2
 -----
  - added content-type and charset metas headers
