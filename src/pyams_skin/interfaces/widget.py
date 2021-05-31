@@ -123,6 +123,9 @@ override_widget_template(ITextAreaWidget,
 
 
 override_widget_template(ITextLinesWidget,
+                         mode=INPUT_MODE,
+                         template='templates/textlines-input.pt', layer=IPyAMSLayer)
+override_widget_template(ITextLinesWidget,
                          mode=DISPLAY_MODE,
                          template='templates/textlines-display.pt', layer=IPyAMSLayer)
 
