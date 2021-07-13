@@ -68,7 +68,9 @@ class DynamicSelectWidgetTermsFactory(SimpleVocabulary):
             for value in values:
                 if not value:
                     continue
-                result.append(self.widget.term_factory(value))
+                term = self.widget.term_factory(value)
+                if term is not None:
+                    result.append(term)
         return result
 
     def getValue(self, value):  # pylint:disable=invalid-name
