@@ -36,6 +36,8 @@ __docformat__ = 'restructuredtext'
 class ContextActionsViewletManager(TemplateBasedViewletManager, WeightOrderedViewletManager):
     """Context actions viewlet manager"""
 
+    css_class = FieldProperty(IContextActionsViewletManager['css_class'])
+
 
 @implementer(IContextAction)
 class ContextActionMixin:

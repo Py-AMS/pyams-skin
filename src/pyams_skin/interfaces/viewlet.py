@@ -99,6 +99,8 @@ class IContentSuffixViewletManager(IViewletManager):
 class IContextActionsViewletManager(IViewletManager):
     """Context actions viewlet manager interface"""
 
+    css_class = TextLine(title="Actions CSS class")
+
 
 class IContextAction(IViewletManager):
     """Context action viewlet manager interface"""
