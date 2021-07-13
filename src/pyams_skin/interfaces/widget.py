@@ -21,8 +21,9 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
 from pyams_form.interfaces.widget import IButtonWidget as IButtonWidgetBase, \
-    ICheckBoxWidget, IMultiWidget, IObjectWidget, IPasswordWidget, ISelectWidget, ISequenceWidget, \
-    ISubmitWidget as ISubmitWidgetBase, ITextAreaWidget, ITextLinesWidget, ITextWidget, IWidget
+    ICheckBoxWidget, IMultiWidget, IObjectWidget, IOrderedSelectWidget, IPasswordWidget, \
+    ISelectWidget, ISequenceWidget, ISubmitWidget as ISubmitWidgetBase, ITextAreaWidget, \
+    ITextLinesWidget, ITextWidget, IWidget
 from pyams_form.template import override_widget_layout, override_widget_template, \
     widget_template_config
 from pyams_layer.interfaces import IPyAMSLayer
@@ -152,6 +153,11 @@ override_widget_template(ISelectWidget,
 override_widget_template(ISelectWidget,
                          mode=DISPLAY_MODE,
                          template='templates/select-display.pt', layer=IPyAMSLayer)
+
+
+override_widget_template(IOrderedSelectWidget,
+                         mode=INPUT_MODE,
+                         template='templates/ordered-select-input.pt', layer=IPyAMSLayer)
 
 
 #
