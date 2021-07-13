@@ -1,4 +1,4 @@
-<div class="dropdown mx-1">
+<div class="d-flex dropdown mx-1">
 	<span class="btn btn-${view.status} ${view.css_class} dropdown-toggle"
 		  data-toggle="dropdown" aria-expanded="false">
 		<i tal:condition="view.icon_class"

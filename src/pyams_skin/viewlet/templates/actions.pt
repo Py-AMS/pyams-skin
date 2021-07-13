@@ -1,4 +1,4 @@
-<div class="btn-group btn-group-xs d-flex flex-wrap float-left ${view.css_class | nothing}">
+<div class="btn-group ${view.css_class} d-flex align-items-center flex-wrap float-left">
 	<tal:loop repeat="viewlet view.viewlets">
 		${structure:viewlet.render()}
 	</tal:loop>
