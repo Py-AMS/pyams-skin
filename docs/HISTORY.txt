@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.6.0
+-----
+ - added custom template for ordered select widget
+ - added CSS class property to context actions viewlet
+ - updated condition to display form's fieldset border
+ - updated components CSS class
+
 1.5.3
 -----
  - added missing text lines widget input template
