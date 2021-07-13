@@ -1,5 +1,5 @@
 <i tal:omit-tag="">${structure:provider:pyams.header}</i>
-<div class="border p-2"
+<div class="${getattr(view, 'border_class', 'border')} p-2"
 	 tal:omit-tag="view.legend">
 	<fieldset class="border"
 			  tal:omit-tag="not:view.legend">
