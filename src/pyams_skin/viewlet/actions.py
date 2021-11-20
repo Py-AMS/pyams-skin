@@ -64,6 +64,14 @@ class ContextAction(ContextActionMixin, Viewlet):
     """Simple context action"""
 
 
+class ContextAddAction(ContextAction):
+    """Simple context add action"""
+
+    status = 'primary'
+    icon_class = 'fas fa-plus'
+    modal_target = True
+
+
 @template_config(template='templates/actions-menu.pt')
 class ContextActionsMenu(ContextActionMixin, TemplateBasedViewletManager,
                          WeightOrderedViewletManager):
