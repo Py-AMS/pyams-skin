@@ -1,4 +1,4 @@
-<div class="form-control h-auto">
+<div class="form-control h-auto disabled">
 	<span id="${view.id}"
 		  class="${view.klass}"
 		  style="${view.style}"

@@ -1,6 +1,8 @@
-<textarea id="${view.id}"
-		  name="${view.name}"
-		  class="form-control ${view.klass}"
-		  cols="${view.cols}"
-		  rows="${view.rows}"
-		  disabled>${view.value}</textarea>
+<div class="form-control h-auto">
+	<textarea id="${view.id}"
+			  name="${view.name}"
+			  class="form-control ${view.klass}"
+			  cols="${view.cols}"
+			  rows="${view.rows}"
+			  disabled>${view.value}</textarea>
+</div>
