@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.6.1
+-----
+ - updated widgets templates
+ - added base class for adding actions
+
 1.6.0
 -----
  - added custom template for ordered select widget
