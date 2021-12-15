@@ -8,10 +8,10 @@
 		   data-original-title="${description}"></i>
 	</label>
 	<div class="${view.input_css_class | view.form.input_css_class | 'col-sm-9 col-md-8'}">
-		<i tal:omit-tag="">${structure:view.prefix.render() | view.prefix | ''}</i>
+		<i tal:omit-tag="">${structure:view.prefix.render() | ''}</i>
 		<div class="form-widget ${view.widget_css_class | view.form.widget_css_class | nothing}">
 			${structure:view.render()}
 		</div>
-		<i tal:omit-tag="">${structure:view.suffix.render() | view.suffix | ''}</i>
+		<i tal:omit-tag="">${structure:view.suffix.render() | ''}</i>
 	</div>
 </div>
