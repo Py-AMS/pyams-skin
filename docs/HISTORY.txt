@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.2
+-----
+ - updated default widget layout
+
 1.6.1
 -----
  - updated widgets templates
