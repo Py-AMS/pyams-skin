@@ -30,4 +30,8 @@
 		data-ams-url="${view.href | nothing}"
 		data-toggle="${'modal' if getattr(view, 'modal_target', False) == True else nothing}"
 		data-original-title="${hint}"
-		data-ams-data='${tales:object_data(view)}'>${value}</button>
+		data-ams-data='${tales:object_data(view)}'>
+	<i tal:condition="hasattr(view, 'icon_class')"
+	   class="${view.icon_class}"></i>
+	<tal:if condition="not:getattr(view, 'icon_only', False)">${value}</tal:if>
+</button>
