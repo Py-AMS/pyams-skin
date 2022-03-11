@@ -32,11 +32,16 @@
 	<tal:if condition="placeholder">
 		<option></option>
 	</tal:if>
-	<option tal:repeat="item view.items"
+	<option tal:repeat="item view.selected_items"
 			id="${item['id']}"
 			value="${item['value']}"
-			selected="${'selected' if item['value'] in view.value else None}">
+			selected="selected">
 		${item['content']}
+	</option>
+	<option tal:repeat="item view.notselected_items"
+			id="${item['id']}"
+			value="${item['value']}">
+			${item['content']}
 	</option>
 </select>
 <input name="${view.name}-empty-marker" type="hidden" value="1"/>
