@@ -20,6 +20,8 @@ This package is composed of a set of utility functions, usable into any Pyramid 
     >>> include_viewlet(config)
     >>> from pyams_form import includeme as include_form
     >>> include_form(config)
+    >>> from pyams_file import includeme as include_file
+    >>> include_file(config)
     >>> from pyams_skin import includeme as include_skin
     >>> include_skin(config)
 
@@ -106,7 +108,9 @@ Custom buttons
         name="form.buttons.action"
         class="btn btn-secondary submit-widget actionbutton-field "
         value="Action"
-        data-loading-test="Action...">Action</button>
+        data-loading-test="Action...">
+        Action
+    </button>
 
     >>> 'reset' in form.actions
     True
@@ -140,6 +144,7 @@ Custom form fields
     >>> from zope.schema import Tuple, TextLine, Date, Time, Datetime, Choice
     >>> from zope.schema.vocabulary import SimpleVocabulary
     >>> from pyams_utils.schema import HTTPMethodField, HTMLField
+    >>> from pyams_skin.schema import BootstrapThumbnailsSelectionDictField
 
     >>> class IMyContent(Interface):
     ...     list_field = Tuple(title="List field",
@@ -151,6 +156,8 @@ Custom form fields
     ...     datetime_field = Datetime(title="Datetime field")
     ...     select_field = Choice(title="Select field",
     ...                           vocabulary=SimpleVocabulary([]))
+    ...     selection_field = BootstrapThumbnailsSelectionDictField(title="Selections",
+    ...                                                             default_width=6)
 
     >>> from zope.interface import implementer
     >>> from zope.schema.fieldproperty import FieldProperty
@@ -165,6 +172,8 @@ Custom form fields
     ...     date_field = FieldProperty(IMyContent['date_field'])
     ...     time_field = FieldProperty(IMyContent['time_field'])
     ...     datetime_field = FieldProperty(IMyContent['datetime_field'])
+    ...     select_field = FieldProperty(IMyContent['select_field'])
+    ...     selection_field = FieldProperty(IMyContent['selection_field'])
 
     >>> content = MyContent()
     >>> content.list_field = ('value 1', 'value2')
@@ -175,6 +184,15 @@ Custom form fields
     >>> content.date_field = datetime.utcnow().date()
     >>> content.time_field = datetime.utcnow().time()
     >>> content.datetime_field = datetime.utcnow()
+
+    >>> content.selection_field.get('xs')
+    <pyams_skin.interfaces.schema.BootstrapThumbnailSelection object at 0x...>
+    >>> content.selection_field.get('xs').selection is None
+    True
+    >>> content.selection_field.get('xs').cols
+    6
+    >>> content.selection_field.get('xs').values
+    (None, 6)
 
     >>> from zope.interface import alsoProvides
     >>> from pyams_layer.interfaces import IPyAMSLayer
