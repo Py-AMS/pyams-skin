@@ -66,10 +66,10 @@ class BaseMeta:
 
     def render(self):
         """Render meta header"""
-        attributes = ' '.join(('{}="{}"'.format(k, v) for k, v in self.attrs.items()))
+        attributes = ' '.join((f'{k}="{v}"' for k, v in self.attrs.items()))
         if self.value:
-            return '<{0} {1}>{2}</{0}>'.format(self.tag, attributes, self.value)
-        return '<{} {} />'.format(self.tag, attributes)
+            return f'<{self.tag} {attributes}>{self.value}</{self.tag}>'
+        return f'<{self.tag} {attributes} />'
 
 
 class HTMLTagMeta(BaseMeta):

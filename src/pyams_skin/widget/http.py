@@ -55,10 +55,10 @@ class HTTPMethodWidget(HTMLFormElement, Widget):
 
     def extract(self, default=NO_VALUE):
         params = self.request.params
-        marker = params.get('{}-empty-marker'.format(self.name), default)
+        marker = params.get(f'{self.name}-empty-marker', default)
         if marker is not default:
-            verb = params.get('{}-verb'.format(self.name))
-            url = params.get('{}-url'.format(self.name))
+            verb = params.get(f'{self.name}-verb')
+            url = params.get(f'{self.name}-url')
             return (verb, url) if verb and url else None
         return default
 
