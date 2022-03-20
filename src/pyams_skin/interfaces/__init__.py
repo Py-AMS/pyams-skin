@@ -14,10 +14,30 @@
 
 This module provides general skin-related interfaces.
 """
+from collections import OrderedDict
+
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
+
 
 __docformat__ = 'restructuredtext'
+
+from pyams_skin import _
 
 
 BOOTSTRAP_STATUS = ('primary', 'secondary', 'success', 'danger',
                     'warning', 'info', 'light', 'dark')
 """Bootstrap status list"""
+
+
+BOOTSTRAP_SIZES = OrderedDict((
+    ('xs', _("Smartphones")),
+    ('sm', _("Tablets")),
+    ('md', _("Medium screens")),
+    ('lg', _("Large screens")),
+    ('xl', _("Extra large screens"))
+))
+
+BOOTSTRAP_SIZES_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v, title=t)
+    for v, t in BOOTSTRAP_SIZES.items()
+])

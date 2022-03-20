@@ -272,3 +272,15 @@ class IDatesRangeWidget(IMultiWidget):
                         template='templates/dates-range-display.pt', layer=IPyAMSLayer)
 class IDatetimesRangeWidget(IMultiWidget):
     """Datetimes range widget marker interface"""
+
+
+#
+# Thumbnails selection widget
+#
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/bootstrap-selection-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/bootstrap-selection-display.pt', layer=IPyAMSLayer)
+class IBootstrapThumbnailsSelectionDictWidget(IWidget):
+    """Bootstrap thumbnails selection widget"""
