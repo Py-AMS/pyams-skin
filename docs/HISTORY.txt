@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.7.0
+-----
+ - added Bootstrap images thumbnails selection schema field and widget
+ - added support for Python 3.10
+ - handle optional icon on action button
+ - updated ordered select input widget template to correctly handle items order
+ - merged resources management adapters in PyAMS_layer package
+ - replace formats with f-strings
+
 1.6.2
 -----
  - updated default widget layout
