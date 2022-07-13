@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.1
+-----
+ - updated HTML editor widget configuration getter
+
 1.7.0
 -----
  - added Bootstrap images thumbnails selection schema field and widget
