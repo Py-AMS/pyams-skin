@@ -42,15 +42,15 @@ class HTMLWidget(TextAreaWidget):
     @property
     def editor_data(self):
         """Extract editor configuration from adapter"""
-        configuration = queryMultiAdapter((self.form, self.request),
+        configuration = queryMultiAdapter((self.form, self.request, self),
                                           IHTMLEditorConfiguration,
                                           name=self.name)
         if (configuration is None) and hasattr(self, 'basename'):  # I18n widget
-            configuration = queryMultiAdapter((self.form, self.request),
+            configuration = queryMultiAdapter((self.form, self.request, self),
                                               IHTMLEditorConfiguration,
                                               name=self.basename)  # pylint:disable=no-member
         if configuration is None:
-            configuration = queryMultiAdapter((self.form, self.request),
+            configuration = queryMultiAdapter((self.form, self.request, self),
                                               IHTMLEditorConfiguration)
         if configuration is None:
             configuration = getattr(self, 'editor_configuration', None)
