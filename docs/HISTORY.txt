@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.2
+-----
+ - updated translations
+
 1.7.1
 -----
  - updated HTML editor widget configuration getter
