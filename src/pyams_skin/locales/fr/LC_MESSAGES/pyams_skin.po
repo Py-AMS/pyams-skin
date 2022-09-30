@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-03-04 22:22+0100\n"
+"POT-Creation-Date: 2022-09-09 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 3.10.dev0\n"
+
+#: src/pyams_skin/interfaces/__init__.py:33
+msgid "Smartphones"
+msgstr "Sur smartphones"
+
+#: src/pyams_skin/interfaces/__init__.py:34
+msgid "Tablets"
+msgstr "Sur tablettes"
+
+#: src/pyams_skin/interfaces/__init__.py:35
+msgid "Medium screens"
+msgstr "Sur écrans moyens"
+
+#: src/pyams_skin/interfaces/__init__.py:36
+msgid "Large screens"
+msgstr "Sur grands écrans"
+
+#: src/pyams_skin/interfaces/__init__.py:37
+msgid "Extra large screens"
+msgstr "Sur très grands écrans"
 
 #: src/pyams_skin/interfaces/templates/date-input.pt:9
 #: src/pyams_skin/interfaces/templates/time-input.pt:9
@@ -27,6 +47,18 @@ msgstr "Afficher le calendrier"
 #: src/pyams_skin/interfaces/templates/datetime-input.pt:58
 msgid "Remove selected value"
 msgstr "Supprimer la valeur sélectionnée"
+
+#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:7
+msgid "Selection"
+msgstr "Sélection"
+
+#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:9
+msgid "Cols width"
+msgstr "Largeur des colonnes"
+
+#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:26
+msgid "Use responsive selection"
+msgstr "Utiliser les sélections responsives"
 
 #: src/pyams_skin/interfaces/templates/http-method-input.pt:10
 #: src/pyams_skin/interfaces/templates/http-method-display.pt:8
