@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.2
+-----
+ - doctests update
+
 1.8.1
 -----
  - templates updates
