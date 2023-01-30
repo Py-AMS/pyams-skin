@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.1
+-----
+ - templates updates
+
 1.8.0
 -----
  - added new schema field and widget to handle selection of boolean values matching Bootstrap
