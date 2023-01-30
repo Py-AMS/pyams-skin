@@ -41,3 +41,12 @@ BOOTSTRAP_SIZES_VOCABULARY = SimpleVocabulary([
     SimpleTerm(v, title=t)
     for v, t in BOOTSTRAP_SIZES.items()
 ])
+
+
+BOOTSTRAP_DEVICES_ICONS = OrderedDict((
+    ('xs', 'fas fa-mobile-alt'),
+    ('sm', 'fas fa-tablet-alt'),
+    ('md', 'fas fa-desktop'),
+    ('lg', 'fas fa-tv'),
+    ('xl', 'fas fa-solar-panel')
+))

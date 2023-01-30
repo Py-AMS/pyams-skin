@@ -17,12 +17,12 @@
 __docformat__ = 'restructuredtext'
 
 from zope.interface import implementer
-from zope.schema import Choice, Dict, Object
+from zope.schema import Bool, Choice, Dict, Object
+from zope.schema.fieldproperty import FieldProperty
 
 from pyams_skin.interfaces import BOOTSTRAP_SIZES, BOOTSTRAP_SIZES_VOCABULARY
 from pyams_skin.interfaces.schema import BootstrapThumbnailSelection, IBootstrapSizeField, \
-    IBootstrapThumbnailSelection, \
-    IBootstrapThumbnailsSelectionDictField
+    IBootstrapThumbnailSelection, IBootstrapThumbnailsSelectionField, IBootstrapDevicesBooleanField
 
 
 @implementer(IBootstrapSizeField)
@@ -40,8 +40,8 @@ class BootstrapThumbnailSelectionField(Object):
         super().__init__(schema=IBootstrapThumbnailSelection, **kw)
 
 
-@implementer(IBootstrapThumbnailsSelectionDictField)
-class BootstrapThumbnailsSelectionDictField(Dict):
+@implementer(IBootstrapThumbnailsSelectionField)
+class BootstrapThumbnailsSelectionField(Dict):
     """Bootstrap full selection dict field"""
 
     def __init__(self, key_type=None, value_type=None,
@@ -55,10 +55,40 @@ class BootstrapThumbnailsSelectionDictField(Dict):
 
     @property
     def default(self):
-        value = {}
-        for size in BOOTSTRAP_SIZES.keys():
-            value[size] = BootstrapThumbnailSelection(cols=self.default_width)
-        return value
+        return {
+            size: BootstrapThumbnailSelection(cols=self.default_width)
+            for size in BOOTSTRAP_SIZES.keys()
+        }
+
+    @default.setter
+    def default(self, value):
+        pass
+
+
+@implementer(IBootstrapDevicesBooleanField)
+class BootstrapDevicesBooleanField(Dict):
+    """Bootstrap boolean devices field
+
+    This field allows to define a boolean value for each Bootstrap device size.
+    """
+
+    default_value = FieldProperty(IBootstrapDevicesBooleanField['default_value'])
+
+    def __init__(self, key_type=None, value_type=None,
+                 default=True, **kw):
+        super().__init__(key_type=BootstrapSizeField(required=True),
+                         **kw)
+        if isinstance(default, bool):
+            self.default_value = {
+                size: default
+                for size in BOOTSTRAP_SIZES.keys()
+            }
+        else:
+            self.default_value = default
+
+    @property
+    def default(self):
+        return self.default_value
 
     @default.setter
     def default(self, value):

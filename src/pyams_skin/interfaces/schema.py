@@ -10,15 +10,16 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_skin.schema module
 
+This module provides Bootstrap related schema fields.
 """
 
 __docformat__ = 'restructuredtext'
 
 from persistent import Persistent
 from zope.interface import Interface, implementer
-from zope.schema import Choice, Int
+from zope.schema import Bool, Dict, Choice, Int
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.interfaces import IChoice, IDict
 
@@ -78,7 +79,7 @@ class BootstrapThumbnailSelection(Persistent):
         return self.selection, self.cols
 
 
-class IBootstrapThumbnailsSelectionDictField(IDict):
+class IBootstrapThumbnailsSelectionField(IDict):
     """Bootstrap thumbnails selection mapping field interface"""
 
     default_width = Int(min=0, max=12, required=False)
@@ -86,3 +87,14 @@ class IBootstrapThumbnailsSelectionDictField(IDict):
 
 class IThumbnailSelection(Interface):
     """Thumbnail selection interface"""
+
+
+class IBootstrapDevicesBooleanField(IDict):
+    """Bootstrap devices boolean field interface
+
+    This field interface allows to define a boolean value for each Bootstrap
+    device size.
+    """
+
+    default_value = Dict(key_type=BootstrapSizeField(),
+                         required=False)

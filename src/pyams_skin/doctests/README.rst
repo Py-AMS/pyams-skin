@@ -144,7 +144,7 @@ Custom form fields
     >>> from zope.schema import Tuple, TextLine, Date, Time, Datetime, Choice
     >>> from zope.schema.vocabulary import SimpleVocabulary
     >>> from pyams_utils.schema import HTTPMethodField, HTMLField
-    >>> from pyams_skin.schema import BootstrapThumbnailsSelectionDictField
+    >>> from pyams_skin.schema import BootstrapThumbnailsSelectionField, BootstrapDevicesBooleanField
 
     >>> class IMyContent(Interface):
     ...     list_field = Tuple(title="List field",
@@ -156,8 +156,10 @@ Custom form fields
     ...     datetime_field = Datetime(title="Datetime field")
     ...     select_field = Choice(title="Select field",
     ...                           vocabulary=SimpleVocabulary([]))
-    ...     selection_field = BootstrapThumbnailsSelectionDictField(title="Selections",
-    ...                                                             default_width=6)
+    ...     selection_field = BootstrapThumbnailsSelectionField(title="Selections",
+    ...                                                         default_width=6)
+    ...     visibility_field = BootstrapDevicesBooleanField(title="Devices",
+    ...                                                     default=True)
 
     >>> from zope.interface import implementer
     >>> from zope.schema.fieldproperty import FieldProperty
@@ -174,6 +176,7 @@ Custom form fields
     ...     datetime_field = FieldProperty(IMyContent['datetime_field'])
     ...     select_field = FieldProperty(IMyContent['select_field'])
     ...     selection_field = FieldProperty(IMyContent['selection_field'])
+    ...     visibility_field = FieldProperty(IMyContent['visibility_field'])
 
     >>> content = MyContent()
     >>> content.list_field = ('value 1', 'value2')
@@ -193,6 +196,18 @@ Custom form fields
     6
     >>> content.selection_field.get('xs').values
     (None, 6)
+
+    >>> content.visibility_field
+    {'xs': True, 'sm': True, 'md': True, 'lg': True, 'xl': True}
+    >>> content.visibility_field.get('xs') is True
+    True
+    >>> value = content.visibility_field
+    >>> value['xs'] = False
+    >>> content.visibility_field = value
+    >>> content.visibility_field
+    {'xs': False, 'sm': True, 'md': True, 'lg': True, 'xl': True}
+    >>> content.visibility_field.get('xs') is False
+    True
 
     >>> from zope.interface import alsoProvides
     >>> from pyams_layer.interfaces import IPyAMSLayer
@@ -423,6 +438,14 @@ selector widget as an example:
     >>> from pyams_form.widget import FieldWidget
     >>> widget = FieldWidget(IMyContent['select_field'], PrincipalWidget(request))
     >>> widget.update()
+    >>> print(widget.render())
+    <select id="select_field"
+            name="select_field"
+            class="select-widget required choice-field"
+            size="1">
+    </select>
+    <input name="select_field-empty-marker" type="hidden" value="1" />
+
 
     >>> from pyams_skin.widget.select import DynamicSelectWidgetTermsFactory
     >>> factory = DynamicSelectWidgetTermsFactory(content, request, None, widget.field, widget)
@@ -432,6 +455,82 @@ selector widget as an example:
     [('one', 'Value one'), ('two', 'Value two')]
     >>> factory.getValue('one')
     'one'
+
+
+Bootstrap devices thumbnails selection widget
+---------------------------------------------
+
+This widget is used to define thumbnail selection for each Bootstrap device for a given image.
+
+    >>> from pyams_skin.interfaces.schema import IBootstrapThumbnailsSelectionField
+    >>> from pyams_skin.interfaces.widget import IBootstrapThumbnailsSelectionWidget
+
+    >>> from pyams_skin.widget.bootstrap import BootstrapThumbnailsSelectionDataConverter
+
+    >>> call_decorator(config, adapter_config, BootstrapThumbnailsSelectionDataConverter,
+    ...                required=(IBootstrapThumbnailsSelectionField,
+    ...                          IBootstrapThumbnailsSelectionWidget))
+
+    >>> from pyams_skin.widget.bootstrap import BootstrapThumbnailsSelectionFieldWidget
+
+    >>> field = IMyContent['selection_field']
+    >>> widget = BootstrapThumbnailsSelectionFieldWidget(field, request)
+    >>> widget.update()
+    >>> _ = widget.render()
+
+    >>> converter = BootstrapThumbnailsSelectionDataConverter(field, widget)
+    >>> value = field.default
+    >>> converter.to_field_value(value)
+    {'xs': <pyams_skin.interfaces.schema.BootstrapThumbnailSelection object at 0x...>,
+     'sm': <pyams_skin.interfaces.schema.BootstrapThumbnailSelection object at 0x...>,
+     'md': <pyams_skin.interfaces.schema.BootstrapThumbnailSelection object at 0x...>,
+     'lg': <pyams_skin.interfaces.schema.BootstrapThumbnailSelection object at 0x...>,
+     'xl': <pyams_skin.interfaces.schema.BootstrapThumbnailSelection object at 0x...>}
+
+    >>> request = TestRequest(context=content, params={
+    ...     'selection_field-empty-marker': '1'
+    ... })
+    >>> alsoProvides(request, IPyAMSLayer)
+
+    >>> widget = BootstrapThumbnailsSelectionFieldWidget(field, request)
+    >>> widget.update()
+    >>> _ = widget.render()
+
+
+Bootstrap devices boolean widget
+--------------------------------
+
+This widget is used to define a boolean value for each Bootstrap device.
+
+    >>> from pyams_skin.interfaces.schema import IBootstrapDevicesBooleanField
+    >>> from pyams_skin.interfaces.widget import IBootstrapDevicesBooleanWidget
+
+    >>> from pyams_skin.widget.bootstrap import BootstrapDevicesBooleanDataConverter
+
+    >>> call_decorator(config, adapter_config, BootstrapDevicesBooleanDataConverter,
+    ...                required=(IBootstrapDevicesBooleanField,
+    ...                          IBootstrapDevicesBooleanWidget))
+
+    >>> from pyams_skin.widget.bootstrap import BootstrapDevicesBooleanFieldWidget
+
+    >>> field = IMyContent['visibility_field']
+    >>> widget = BootstrapDevicesBooleanFieldWidget(field, request)
+    >>> widget.update()
+    >>> _ = widget.render()
+
+    >>> converter = BootstrapDevicesBooleanDataConverter(field, widget)
+    >>> value = field.default
+    >>> converter.to_field_value(value)
+    {'xs': False, 'sm': True, 'md': True, 'lg': True, 'xl': True}
+
+    >>> request = TestRequest(context=content, params={
+    ...     'visibility_field-empty-marker': '1'
+    ... })
+    >>> alsoProvides(request, IPyAMSLayer)
+
+    >>> widget = BootstrapDevicesBooleanFieldWidget(field, request)
+    >>> widget.update()
+    >>> _ = widget.render()
 
 
 Complete form
