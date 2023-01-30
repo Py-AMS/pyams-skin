@@ -37,4 +37,4 @@
 				selected="${'selected' if item['selected'] else None}">${item['content']}</option>
 	</tal:loop>
 </select>
-<input name="${view.name}-empty-marker" type="hidden" value="1"/>
+<input name="${view.name}-empty-marker" type="hidden" value="1" />

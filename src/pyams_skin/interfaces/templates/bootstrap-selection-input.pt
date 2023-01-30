@@ -42,5 +42,5 @@
 			</tal:var>
 		</tr>
 	</table>
-	<input type="hidden" name="${view.name}-empty-marker" value="1"/>
+	<input type="hidden" name="${view.name}-empty-marker" value="1" />
 </div>
