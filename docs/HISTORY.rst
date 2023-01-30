@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.8.0
+-----
+ - added new schema field and widget to handle selection of boolean values matching Bootstrap
+   devices; this is used for example in PyAMS_portal to select devices for which a given portlet
+   is displayed or not
+ - added support for Python 3.11
+ - renamed Bootstrap thumbnail selection schema field and widget
+ - updated doctests
+
+
 1.7.2
 -----
  - updated translations
