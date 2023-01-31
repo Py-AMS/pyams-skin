@@ -21,8 +21,9 @@ from zope.schema import Bool, Choice, Dict, Object
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_skin.interfaces import BOOTSTRAP_SIZES, BOOTSTRAP_SIZES_VOCABULARY
-from pyams_skin.interfaces.schema import BootstrapThumbnailSelection, IBootstrapSizeField, \
-    IBootstrapThumbnailSelection, IBootstrapThumbnailsSelectionField, IBootstrapDevicesBooleanField
+from pyams_skin.interfaces.schema import BootstrapThumbnailSelection, \
+    IBootstrapDevicesBooleanField, IBootstrapSizeField, IBootstrapThumbnailSelection, \
+    IBootstrapThumbnailsSelectionField
 
 
 @implementer(IBootstrapSizeField)
@@ -55,6 +56,7 @@ class BootstrapThumbnailsSelectionField(Dict):
 
     @property
     def default(self):
+        """Default value getter"""
         return {
             size: BootstrapThumbnailSelection(cols=self.default_width)
             for size in BOOTSTRAP_SIZES.keys()
@@ -62,7 +64,7 @@ class BootstrapThumbnailsSelectionField(Dict):
 
     @default.setter
     def default(self, value):
-        pass
+        """Default value setter (do nothing)"""
 
 
 @implementer(IBootstrapDevicesBooleanField)
@@ -88,8 +90,9 @@ class BootstrapDevicesBooleanField(Dict):
 
     @property
     def default(self):
+        """Default value getter"""
         return self.default_value
 
     @default.setter
     def default(self, value):
-        pass
+        """Default value setter (do nothing)"""
