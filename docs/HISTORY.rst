@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.8.4
+-----
+ - updated default field management of Bootstrap thumbnails selection field to be able to
+   set default column width for each device
+
 1.8.3
 -----
  - code cleanup
