@@ -60,9 +60,10 @@ class BootstrapThumbnailsSelectionWidget(HTMLFormElement, Widget):
         """Display value getter"""
         value = self.value
         if not value:
-            value = {}
-            for size in BOOTSTRAP_SIZES.keys():
-                value[size] = BootstrapThumbnailSelection(cols=self.field.default_width)
+            value = {
+                size: BootstrapThumbnailSelection(cols=self.field.default_width.get(size))
+                for size in BOOTSTRAP_SIZES.keys()
+            }
         return value
 
     def extract(self, default=NO_VALUE):
@@ -73,7 +74,8 @@ class BootstrapThumbnailsSelectionWidget(HTMLFormElement, Widget):
             return {
                 size: BootstrapThumbnailSelection(
                     selection=params.get(f'{self.name}-{size}-selection'),
-                    cols=params.get(f'{self.name}-{size}-cols', self.field.default_width))
+                    cols=params.get(f'{self.name}-{size}-cols',
+                                    self.field.default_width.get(size)))
                 for size in BOOTSTRAP_SIZES
             }
         return default

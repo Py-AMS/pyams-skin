@@ -51,14 +51,20 @@ class BootstrapThumbnailsSelectionField(Dict):
         super().__init__(key_type=BootstrapSizeField(required=True),
                          value_type=BootstrapThumbnailSelectionField(),
                          **kw)
-        self.default_width = default_width
+        if isinstance(default_width, int):
+            self.default_width = {
+                size: default_width
+                for size in BOOTSTRAP_SIZES.keys()
+            }
+        else:
+            self.default_width = default_width
         self.change_width = change_width
 
     @property
     def default(self):
         """Default value getter"""
         return {
-            size: BootstrapThumbnailSelection(cols=self.default_width)
+            size: BootstrapThumbnailSelection(cols=self.default_width.get(size))
             for size in BOOTSTRAP_SIZES.keys()
         }
 
