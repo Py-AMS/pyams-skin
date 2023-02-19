@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.0
+-----
+ - added new textline widgets with button to copy input value to clipboard
+
 1.8.4
 -----
  - updated default field management of Bootstrap thumbnails selection field to be able to
