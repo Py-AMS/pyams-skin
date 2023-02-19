@@ -147,6 +147,7 @@ Custom form fields
     >>> from pyams_skin.schema import BootstrapThumbnailsSelectionField, BootstrapDevicesBooleanField
 
     >>> class IMyContent(Interface):
+    ...     textline_field = TextLine(title="Textline field")
     ...     list_field = Tuple(title="List field",
     ...                        value_type=TextLine())
     ...     http_method = HTTPMethodField(title="HTTP method")
@@ -168,6 +169,7 @@ Custom form fields
     ... class MyContent:
     ...     __name__ = None
     ...     __parent__ = None
+    ...     textline_field = FieldProperty(IMyContent['textline_field'])
     ...     list_field = FieldProperty(IMyContent['list_field'])
     ...     http_method = FieldProperty(IMyContent['http_method'])
     ...     html_field = FieldProperty(IMyContent['html_field'])
@@ -214,6 +216,34 @@ Custom form fields
 
     >>> request = TestRequest(context=content)
     >>> alsoProvides(request, IPyAMSLayer)
+
+
+Text widget with clipboard copy
+-------------------------------
+
+This widget can be used to copy input value to clipboard:
+
+    >>> from pyams_skin.widget.text import TextCopyFieldWidget
+    >>> text_widget = TextCopyFieldWidget(IMyContent['textline_field'], request)
+    >>> text_widget.update()
+    >>> print(text_widget.render())
+    <div class="input-group"
+         data-ams-modules="clipboard"
+         data-target-input="nearest">
+        <input type="text"
+                   id="textline_field"
+                   name="textline_field"
+                   class="form-control text-widget required textline-field"
+                   value="" />
+        <div class="input-group-append">
+                <div class="input-group-text hint"
+                           data-original-title="Copy value to clipboard"
+                           data-ams-click-handler="MyAMS.clipboard.copyText"
+                           data-ams-clipboard-target="#textline_field">
+                        <i class="far fa-clipboard"></i>
+                </div>
+        </div>
+    </div>
 
 
 Ordered list widget

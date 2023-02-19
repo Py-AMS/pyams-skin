@@ -115,6 +115,14 @@ override_widget_template(ITextWidget,
                          template='templates/text-display.pt', layer=IPyAMSLayer)
 
 
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/text-copy-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/text-copy-display.pt', layer=IPyAMSLayer)
+class ITextCopyWidget(ITextWidget):
+    """Text widget with copy button"""
+
+
 override_widget_template(ITextAreaWidget,
                          mode=INPUT_MODE,
                          template='templates/textarea-input.pt', layer=IPyAMSLayer)
