@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2023-02-19 01:41+0100\n"
+"POT-Creation-Date: 2023-03-11 00:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 4.15.0\n"
+
+#: ./src/pyams_skin/viewlet/templates/errors.pt:6
+msgid "Close"
+msgstr ""
+
+#: ./src/pyams_skin/viewlet/templates/errors.pt:14
+msgid "${snippet.widget.label}:"
+msgstr ""
 
 #: ./src/pyams_skin/interfaces/__init__.py:33
 msgid "Smartphones"
