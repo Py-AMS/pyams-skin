@@ -109,6 +109,11 @@ def DateFieldWidget(field, request):  # pylint: disable=invalid-name
 class TimeDataConverter(BaseDatetimeDataConverter):
     """Time widget data converter"""
 
+    def to_field_value(self, value):
+        if not value:
+            return None
+        return parse_date(value).time()
+
 
 @implementer_only(ITimeWidget)
 class TimeWidget(TextWidget):
