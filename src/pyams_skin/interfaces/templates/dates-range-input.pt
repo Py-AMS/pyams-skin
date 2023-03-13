@@ -4,9 +4,9 @@
 		<div class="col-form-label px-2">
 			<label for="${widget.id}">
 				<span tal:condition="repeat['widget'].start()"
-					  i18n:translate="">from</span>
+					  i18n:translate="">${view.field.from_label}</span>
 				<span tal:condition="repeat['widget'].end()"
-						 i18n:translate="">to</span>
+					  i18n:translate="">${view.field.to_label}</span>
 			</label>
 		</div>
 		<div class="widget">
