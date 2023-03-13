@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.10.0
+------
+ - added form errors viewlet
+ - updated base form template to include errors
+ - updated time data converter
+ - update date and datetime ranges schema fields interfaces
+
 1.9.0
 -----
  - added new textline widgets with button to copy input value to clipboard
