@@ -21,6 +21,7 @@
 		  data-ams-form-submit-target="${view.ajax_form_target}"
 		  data-async
 		  data-ams-data='${tales:object_data(view)}'>
+		<i tal:omit-tag="">${structure:provider:pyams.form_errors}</i>
 		<i tal:omit-tag="">${structure:provider:pyams.form_header}</i>
 		<fieldset tal:define="help provider:pyams.help;
 						 	  prefix provider:pyams.prefix;
