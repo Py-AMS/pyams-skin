@@ -18,13 +18,12 @@ This module defines base adapters for breadcrumbs management.
 __docformat__ = 'restructuredtext'
 
 from pyramid.location import lineage
-from zope.component import queryMultiAdapter
 from zope.interface import Interface, implementer
 from zope.location import ILocation
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_skin.interfaces.viewlet import IBreadcrumbItem
+from pyams_skin.interfaces.viewlet import IBreadcrumbItem, IBreadcrumbs
 from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.url import absolute_url
@@ -46,8 +45,8 @@ class BreadcrumbItem(ContextRequestViewAdapter):
 
 @adapter_config(required=(ILocation, IPyAMSLayer, Interface),
                 provides=IBreadcrumbItem)
-class PyAMSBreadcrumbItem(BreadcrumbItem):
-    """Default breadcrumb item adapter"""
+class LocationBreadcrumbItem(BreadcrumbItem):
+    """Default location breadcrumb item adapter"""
 
     @property
     def label(self):
@@ -58,17 +57,37 @@ class PyAMSBreadcrumbItem(BreadcrumbItem):
     view_name = None
 
 
+@adapter_config(required=(ILocation, IPyAMSLayer, Interface),
+                provides=IBreadcrumbs)
+class LocationBreadcrumbs(ContextRequestViewAdapter):
+    """Default location breadcrumbs adapter"""
+
+    def get_items(self, source):
+        """Get breadcrumbs items from given source"""
+        registry = self.request.registry
+        for context in reversed(tuple(lineage(source))):
+            item = registry.queryMultiAdapter((context, self.request, self.view),
+                                              IBreadcrumbItem)
+            if (item is not None) and item.label:
+                yield item
+
+    @property
+    def items(self):
+        """Breadcrumbs items iterator"""
+        yield from self.get_items(self.context)
+
+
 @contentprovider_config(name='pyams.breadcrumbs',
                         context=ILocation, layer=IPyAMSLayer, view=Interface)
 @template_config(template='templates/breadcrumbs.pt', layer=IPyAMSLayer)
-class BreadcrumbsAdapter(ViewContentProvider):
-    """Generic breadcrumbs adapter"""
+class BreadcrumbsContentProvider(ViewContentProvider):
+    """Generic breadcrumbs content provider"""
 
     @property
     def items(self):
         """Breadcrumbs items getter"""
-        for context in reversed(tuple(lineage(self.context))):
-            item = queryMultiAdapter((context, self.request, self.view),
-                                     IBreadcrumbItem)
-            if (item is not None) and item.label:
-                yield item
+        registry = self.request.registry
+        breadcrumbs = registry.queryMultiAdapter((self.context, self.request, self.view),
+                                                 IBreadcrumbs)
+        if breadcrumbs is not None:
+            yield from breadcrumbs.items
