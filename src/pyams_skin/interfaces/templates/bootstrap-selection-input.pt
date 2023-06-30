@@ -4,7 +4,8 @@
 	<table>
 		<tr>
 			<th></th>
-			<th class="text-center" i18n:translate="">Selection</th>
+			<th tal:condition="view.field.change_selection"
+				class="text-center" i18n:translate="">Selection</th>
 			<th tal:condition="view.field.change_width"
 				class="text-center" i18n:translate="">Cols width</th>
 		</tr>
@@ -18,7 +19,7 @@
 						${term.title}
 					</label>
 				</td>
-				<td>
+				<td tal:condition="view.field.change_selection">
 					<select id="${view.name}_${term.value}_selection"
 							name="${view.name}-${term.value}-selection"
 							class="select2">

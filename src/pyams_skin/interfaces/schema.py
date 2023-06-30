@@ -57,6 +57,9 @@ class IBootstrapThumbnailSelection(Interface):
     selection = ThumbnailSelectionField(required=False)
     cols = Int(min=0, max=12, required=False)
 
+    def values(self):
+        """Iterator over selection and columns"""
+
 
 @implementer(IBootstrapThumbnailSelection)
 class BootstrapThumbnailSelection(Persistent):
@@ -83,6 +86,8 @@ class IBootstrapThumbnailsSelectionField(IDict):
     """Bootstrap thumbnails selection mapping field interface"""
 
     default_width = Int(min=0, max=12, required=False)
+
+    change_width = Bool(default=True)
 
 
 class IThumbnailSelection(Interface):
