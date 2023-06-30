@@ -29,7 +29,7 @@ from pyams_layer.interfaces import IFormLayer
 from pyams_skin.interfaces.widget import IDateWidget, IDatesRangeWidget, IDatetimeWidget, \
     IDatetimesRangeWidget, ITimeWidget
 from pyams_utils.adapter import adapter_config
-from pyams_utils.date import parse_date
+from pyams_utils.date import parse_date, parse_time
 from pyams_utils.schema import IDatesRangeField, IDatetimesRangeField
 from pyams_utils.timezone import tztime
 
@@ -112,7 +112,7 @@ class TimeDataConverter(BaseDatetimeDataConverter):
     def to_field_value(self, value):
         if not value:
             return None
-        return parse_date(value).time()
+        return parse_time(value)
 
 
 @implementer_only(ITimeWidget)
