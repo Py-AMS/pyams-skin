@@ -64,6 +64,13 @@ class ContextAction(ContextActionMixin, Viewlet):
     """Simple context action"""
 
 
+class JsContextAction(ContextAction):
+    """Javascript context action"""
+
+    def get_href(self):
+        return self.href
+
+
 class ContextAddAction(ContextAction):
     """Simple context add action"""
 
