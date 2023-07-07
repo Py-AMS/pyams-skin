@@ -40,4 +40,4 @@
         </tal:loop>
     </tal:if>
 </select>
-<input name="${view.name}-empty-marker" type="hidden" value="1"/>
+<input name="${view.name}-empty-marker" type="hidden" value="1" />

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.11.0
+------
+ - viewlets refactoring
+ - updated Bootstrap thumbnails selection field
+ - added metas headers to fullpage modal layout
+
 1.10.0
 ------
  - added form errors viewlet
