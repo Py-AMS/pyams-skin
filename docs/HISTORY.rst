@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.0
+-----
+ - upgraded to Pyramid 2.0
+ - added color selection widget
+
 1.11.0
 ------
  - viewlets refactoring
