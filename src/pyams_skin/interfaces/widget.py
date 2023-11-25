@@ -169,7 +169,7 @@ override_widget_template(IOrderedSelectWidget,
 
 
 #
-# Date/time widgets
+# Date/time widgets interfaces
 #
 
 @widget_template_config(mode=INPUT_MODE,
@@ -194,6 +194,18 @@ class IDateWidget(ITextWidget):
                         template='templates/time-display.pt', layer=IPyAMSLayer)
 class ITimeWidget(ITextWidget):
     """Time widget interface"""
+
+
+#
+# Colorpicker widget interface
+#
+
+@widget_template_config(mode=INPUT_MODE,
+                        template='templates/color-input.pt', layer=IPyAMSLayer)
+@widget_template_config(mode=DISPLAY_MODE,
+                        template='templates/color-display.pt', layer=IPyAMSLayer)
+class IColorWidget(ITextWidget):
+    """Color widget interface"""
 
 
 #
