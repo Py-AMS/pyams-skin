@@ -471,7 +471,7 @@ selector widget as an example:
     >>> print(widget.render())
     <select id="select_field"
             name="select_field"
-            class="form-control select2 select-widget required choice-field"
+            class="select-widget required choice-field"
             size="1">
     </select>
     <input name="select_field-empty-marker" type="hidden" value="1" />
