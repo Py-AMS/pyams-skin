@@ -52,5 +52,17 @@ class IModalPage(IView):
                            default='modal-lg')
 
 
+class IModalAddForm(IModalPage):
+    """Modal add form marker interface"""
+
+
+class IModalEditForm(IModalPage):
+    """Modal edit form marker interface"""
+
+
+class IModalDisplayForm(IModalPage):
+    """Modal display form marker interface"""
+
+
 class ISearchPage(Interface):
     """Custom search page view marker interface"""
