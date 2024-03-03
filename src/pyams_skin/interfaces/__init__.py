@@ -29,6 +29,24 @@ BOOTSTRAP_STATUS = ('primary', 'secondary', 'success', 'danger',
 """Bootstrap status list"""
 
 
+BOOTSTRAP_STATUS_LABEL = OrderedDict((
+    ('primary', _("Primary")),
+    ('secondary', _("Secondary")),
+    ('success', _("Success")),
+    ('danger', _("Danger")),
+    ('warning', _("Warning")),
+    ('info', _("Info")),
+    ('light', _("Light")),
+    ('dark', _("Dark"))
+))
+
+
+BOOTSTRAP_STATUS_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v, title=t)
+    for v, t in BOOTSTRAP_STATUS_LABEL.items()
+])
+
+
 BOOTSTRAP_SIZES = OrderedDict((
     ('xs', _("Smartphones")),
     ('sm', _("Tablets")),

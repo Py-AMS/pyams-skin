@@ -2,11 +2,10 @@
 # SOME DESCRIPTIVE TITLE
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2023-03-11 00:49+0100\n"
+"POT-Creation-Date: 2024-03-03 23:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,33 +15,83 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 3.10.dev0\n"
 
-#: src/pyams_skin/viewlet/templates/errors.pt:6
-msgid "Close"
-msgstr "Fermer"
-
-#: src/pyams_skin/viewlet/templates/errors.pt:14
-msgid "${snippet.widget.label}:"
-msgstr "${snippet.widget.label} :"
-
 #: src/pyams_skin/interfaces/__init__.py:33
+msgid "Primary"
+msgstr "Primaire"
+
+#: src/pyams_skin/interfaces/__init__.py:34
+msgid "Secondary"
+msgstr "Secondaire"
+
+#: src/pyams_skin/interfaces/__init__.py:35
+msgid "Success"
+msgstr "Succès"
+
+#: src/pyams_skin/interfaces/__init__.py:36
+msgid "Danger"
+msgstr "Danger"
+
+#: src/pyams_skin/interfaces/__init__.py:37
+msgid "Warning"
+msgstr "Avertissement"
+
+#: src/pyams_skin/interfaces/__init__.py:38
+msgid "Info"
+msgstr "Information"
+
+#: src/pyams_skin/interfaces/__init__.py:39
+msgid "Light"
+msgstr "Clair"
+
+#: src/pyams_skin/interfaces/__init__.py:40
+msgid "Dark"
+msgstr "Sombre"
+
+#: src/pyams_skin/interfaces/__init__.py:51
 msgid "Smartphones"
 msgstr "Sur smartphones"
 
-#: src/pyams_skin/interfaces/__init__.py:34
+#: src/pyams_skin/interfaces/__init__.py:52
 msgid "Tablets"
 msgstr "Sur tablettes"
 
-#: src/pyams_skin/interfaces/__init__.py:35
+#: src/pyams_skin/interfaces/__init__.py:53
 msgid "Medium screens"
 msgstr "Sur écrans moyens"
 
-#: src/pyams_skin/interfaces/__init__.py:36
+#: src/pyams_skin/interfaces/__init__.py:54
 msgid "Large screens"
 msgstr "Sur grands écrans"
 
-#: src/pyams_skin/interfaces/__init__.py:37
+#: src/pyams_skin/interfaces/__init__.py:55
 msgid "Extra large screens"
 msgstr "Sur très grands écrans"
+
+#: src/pyams_skin/interfaces/templates/http-method-display.pt:8
+#: src/pyams_skin/interfaces/templates/http-method-input.pt:10
+msgid "(no selection)"
+msgstr "(pas de sélection)"
+
+#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:8
+msgid "Selection"
+msgstr "Sélection"
+
+#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:10
+msgid "Cols width"
+msgstr "Largeur des colonnes"
+
+#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:27
+msgid "Use responsive selection"
+msgstr "Utiliser les sélections responsives"
+
+#: src/pyams_skin/interfaces/templates/text-copy-input.pt:39
+#: src/pyams_skin/interfaces/templates/text-copy-display.pt:39
+msgid "Copy value to clipboard"
+msgstr "Copier dans le presse-papiers"
+
+#: src/pyams_skin/interfaces/templates/form.pt:10
+msgid "Back to previous page"
+msgstr "Revenir à la page précédente"
 
 #: src/pyams_skin/interfaces/templates/date-input.pt:9
 #: src/pyams_skin/interfaces/templates/time-input.pt:9
@@ -56,39 +105,18 @@ msgstr "Afficher le calendrier"
 msgid "Remove selected value"
 msgstr "Supprimer la valeur sélectionnée"
 
-#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:7
-msgid "Selection"
-msgstr "Sélection"
+#: src/pyams_skin/viewlet/templates/errors.pt:6
+msgid "Close"
+msgstr "Fermer"
 
-#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:9
-msgid "Cols width"
-msgstr "Largeur des colonnes"
+#~ msgid "${snippet.widget.label}:"
+#~ msgstr "${snippet.widget.label} :"
 
-#: src/pyams_skin/interfaces/templates/bootstrap-selection-input.pt:26
-msgid "Use responsive selection"
-msgstr "Utiliser les sélections responsives"
+#~ msgid "from"
+#~ msgstr "à partir du"
 
-#: src/pyams_skin/interfaces/templates/http-method-input.pt:10
-#: src/pyams_skin/interfaces/templates/http-method-display.pt:8
-msgid "(no selection)"
-msgstr "(pas de sélection)"
-
-#: src/pyams_skin/interfaces/templates/form.pt:10
-msgid "Back to previous page"
-msgstr "Revenir à la page précédente"
-
-#: src/pyams_skin/interfaces/templates/text-copy-input.pt:39
-#: src/pyams_skin/interfaces/templates/text-copy-display.pt:39
-msgid "Copy value to clipboard"
-msgstr "Copier dans le presse-papiers"
-
-#: src/pyams_skin/interfaces/templates/dates-range-input.pt:7
-msgid "from"
-msgstr "à partir du"
-
-#: src/pyams_skin/interfaces/templates/dates-range-input.pt:9
-msgid "to"
-msgstr "et avant le"
+#~ msgid "to"
+#~ msgstr "et avant le"
 
 #~ msgid "Inherit parent skin?"
 #~ msgstr "Hériter du skin parent ?"
