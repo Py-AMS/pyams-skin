@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.1
+-----
+ - added translation for Bootstrap status labels
+
 2.1.0
 -----
  - updated modal page layout
