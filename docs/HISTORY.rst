@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.0
+-----
+ - added support for custom modal content class
+
 2.1.1
 -----
  - added translation for Bootstrap status labels
