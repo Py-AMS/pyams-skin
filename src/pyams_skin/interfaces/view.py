@@ -38,6 +38,9 @@ class IModalFullPage(IFullPage):
     modal_class = TextLine(title="Modal dialog CSS class",
                            default='modal-lg')
 
+    modal_content_class = TextLine(title="Modal dialog content CSS class",
+                                   default='')
+
 
 @layout_config(template='templates/inner-layout.pt', layer=IPyAMSLayer)
 class IInnerPage(IView):
@@ -50,6 +53,9 @@ class IModalPage(IView):
 
     modal_class = TextLine(title="Modal dialog CSS class",
                            default='modal-lg')
+
+    modal_content_class = TextLine(title="Modal dialog content CSS class",
+                                   default='')
 
 
 class IModalAddForm(IModalPage):

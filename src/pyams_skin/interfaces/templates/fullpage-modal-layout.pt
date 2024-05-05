@@ -7,7 +7,7 @@
     <body>
         <div id="content">
             <div class="modal-dialog ${view.modal_class | ''}">
-                <div class="modal-content p-1">
+                <div class="modal-content ${view.modal_content_class | ''} p-1">
                     <i tal:omit-tag="">${structure:provider:pyams.header}</i>
                     <i tal:omit-tag="">${structure:provider:pagelet}</i>
                     <i tal:omit-tag="">${structure:provider:pyams.footer}</i>

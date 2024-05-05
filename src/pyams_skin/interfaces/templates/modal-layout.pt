@@ -1,5 +1,5 @@
 <div class="modal-dialog ${view.modal_class | ''}">
-	<div class="modal-content">
+	<div class="modal-content ${view.modal_content_class | ''}">
 		<h4 class="modal-header bg-secondary-modal mb-0">
 			<span class="d-block">
 				<i tal:omit-tag="">${structure:request.localizer.translate(view.title)}</i>
