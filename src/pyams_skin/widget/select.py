@@ -53,22 +53,29 @@ class DynamicSelectWidgetTermsFactory(SimpleVocabulary):
 
     def getTerms(self):  # pylint:disable=invalid-name
         """Get terms from factory"""
-        values = NO_VALUE
+        value = NO_VALUE
         result = []
         if (not self.widget.ignore_request) and (self.widget.name in self.request.params):
             try:
-                values = self.request.params.getall(self.widget.name)
+                value = self.request.params.getall(self.widget.name)
             except AttributeError:
-                values = self.request.params.get(self.widget.name)
-        if (values is NO_VALUE) and (not self.widget.ignore_context):
-            values = getMultiAdapter((self.context, self.field), IDataManager).query()
-        if values and (values is not NO_VALUE):
-            if not isinstance(values, (list, dict, set)):
-                values = (values,)
-            for value in values:
-                if not value:
+                value = self.request.params.get(self.widget.name)
+        if (value is NO_VALUE) and (not self.widget.ignore_context):
+            value = getMultiAdapter((self.context, self.field), IDataManager).query()
+        if value and (value is not NO_VALUE):
+            values = []
+            if not isinstance(value, (list, dict, set)):
+                value = (value,)
+            for val in value:
+                if isinstance(val, str):
+                    values.extend(val.split(self.widget.separator))
+                else:
+                    values.append(val)
+            value = tuple(values)
+            for token in value:
+                if not token:
                     continue
-                term = self.widget.term_factory(value)
+                term = self.widget.term_factory(token)
                 if term is not None:
                     result.append(term)
         return result
