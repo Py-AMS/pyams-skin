@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2.1
+-----
+ - added condition to display icon tag in menu item
+ - updated dynamic select widget terms factory
+
 2.2.0
 -----
  - added support for custom modal content class
