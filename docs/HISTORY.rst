@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.2
+-----
+ - updated doctests
+
 2.2.1
 -----
  - added condition to display icon tag in menu item
