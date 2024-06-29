@@ -432,7 +432,7 @@ Date, time and datetime widgets
     '...-...-...T...:...:...+00:00'
     >>> field_value = converter.to_field_value(widget_value)
     >>> field_value
-    datetime.datetime(..., tzinfo=<StaticTzInfo 'GMT'>)
+    datetime.datetime(..., tzinfo=<UTC>)
 
     >>> converter.to_widget_value(None) is None
     True
