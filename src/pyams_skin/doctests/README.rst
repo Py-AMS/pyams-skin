@@ -94,7 +94,9 @@ Custom buttons
         name="form.buttons.submit"
         class="btn btn-primary submit-widget submitbutton-field "
         value="Submit"
-        data-loading-test="Submit...">Submit</button>
+        data-loading-test="Submit...">
+        Submit
+    </button>
 
 
     >>> 'action' in form.actions
