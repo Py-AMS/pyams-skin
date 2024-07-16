@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.3
+-----
+ - added MyAMS target URL support to submit button
+
 2.2.2
 -----
  - updated doctests
