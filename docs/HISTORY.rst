@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2.4
+-----
+ - updated widget configuration getter of TinyMCE HTML editor
+ - updated object field input template
+
 2.2.3
 -----
  - added MyAMS target URL support to submit button
