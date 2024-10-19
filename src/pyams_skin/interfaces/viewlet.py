@@ -51,6 +51,7 @@ class IMenuItem(IViewlet):
     icon_class = TextLine(title="FontAwesome icon class, including prefix")
 
     href = TextLine(title="Link target URL",
+                    required=False,
                     default='#')
 
     def get_href(self):
