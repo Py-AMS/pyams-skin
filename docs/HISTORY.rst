@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.3.0
+-----
+ - added dotted decimal field data converter
+ - make menu URL property as not required
+
 2.2.4
 -----
  - updated widget configuration getter of TinyMCE HTML editor
