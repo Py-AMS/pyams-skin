@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.4.0
+-----
+ - added custom mapping widget and data converter
+
 2.3.0
 -----
  - added dotted decimal field data converter
