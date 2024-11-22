@@ -1,4 +1,4 @@
-==================
+from pyams_content_es.zmi import content_indexer_label==================
 PyAMS_skin package
 ==================
 
@@ -143,7 +143,7 @@ Custom buttons
 Custom form fields
 ------------------
 
-    >>> from zope.schema import Tuple, TextLine, Date, Time, Datetime, Choice
+    >>> from zope.schema import Tuple, TextLine, Date, Dict, Time, Datetime, Choice
     >>> from zope.schema.vocabulary import SimpleVocabulary
     >>> from pyams_utils.schema import HTTPMethodField, HTMLField
     >>> from pyams_skin.schema import BootstrapThumbnailsSelectionField, BootstrapDevicesBooleanField
@@ -163,6 +163,9 @@ Custom form fields
     ...                                                         default_width=6)
     ...     visibility_field = BootstrapDevicesBooleanField(title="Devices",
     ...                                                     default=True)
+    ...     mapping_field = Dict(title="Mapping",
+    ...                          key_type=TextLine(),
+    ...                          value_type=TextLine())
 
     >>> from zope.interface import implementer
     >>> from zope.schema.fieldproperty import FieldProperty
@@ -181,6 +184,7 @@ Custom form fields
     ...     select_field = FieldProperty(IMyContent['select_field'])
     ...     selection_field = FieldProperty(IMyContent['selection_field'])
     ...     visibility_field = FieldProperty(IMyContent['visibility_field'])
+    ...     mapping_field = FieldProperty(IMyContent['mapping_field'])
 
     >>> content = MyContent()
     >>> content.list_field = ('value 1', 'value2')
@@ -440,6 +444,39 @@ Date, time and datetime widgets
     True
     >>> converter.to_field_value(None) is None
     True
+
+
+Custom mapping widget
+---------------------
+
+This custom widget is used to use a TextArea widget to define mapping key and values, using a simple
+multilines "key=value" syntax:
+
+    >>> from pyams_skin.widget.dict import DictFieldWidget, DictWidgetDataConverter
+
+    >>> content.mapping_field = {'Field 1': 'Value 1'}
+
+    >>> mapping_widget = DictFieldWidget(IMyContent['mapping_field'], request)
+    >>> mapping_widget.context = content
+    >>> alsoProvides(mapping_widget, IContextAware)
+    >>> mapping_widget.update()
+    >>> mapping_widget.value
+    'Field 1=Value 1'
+
+    >>> converter = DictWidgetDataConverter(IMyContent['mapping_field'], mapping_widget)
+    >>> mapping_value = converter.to_widget_value(content.mapping_field)
+    >>> mapping_value
+    'Field 1=Value 1'
+    >>> converter.to_widget_value(None)
+    ''
+    >>> field_value = converter.to_field_value(mapping_value)
+    >>> field_value
+    {'Field 1': 'Value 1'}
+
+    >>> converter.to_field_value('') is None
+    True
+    >>> pprint.pprint(converter.to_field_value('\nField 1=Value 1\n\nField 2=Value 2\n'))
+    {'Field 1': 'Value 1', 'Field 2': 'Value 2'}
 
 
 Dynamic select widget

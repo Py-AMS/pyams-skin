@@ -209,6 +209,14 @@ class IColorWidget(ITextWidget):
 
 
 #
+# Custom Dict field widget interface
+#
+
+class IDictWidget(ITextAreaWidget):
+    """Custom mapping widget interface"""
+    
+    
+#
 # Dynamic select widget interface
 #
 
